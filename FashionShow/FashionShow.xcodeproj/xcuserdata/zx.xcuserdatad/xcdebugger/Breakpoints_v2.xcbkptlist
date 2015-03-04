@@ -21,11 +21,11 @@
             condition = "1"
             continueAfterRunningActions = "Yes"
             filePath = "FashionShow/View/ZXTabBar.m"
-            timestampString = "447152753.122098"
+            timestampString = "447153861.229558"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "-image:didFinishSavingWithError:contextInfo:"
             landmarkType = "5">
             <Actions>

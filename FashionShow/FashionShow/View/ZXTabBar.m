@@ -142,25 +142,20 @@
         {
             
            NSLog(@"%s [LINE:%d] image_url=%@", __func__, __LINE__,image_url);
-            UIImage *savedImage = [UIImage imageNamed:@"oneStar"];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            [manager downloadWithURL:imageURL
+            [manager downloadWithURL:image_url
                              options:0
-                            progress:^(NSInteger receivedSize, NSInteger expectedSize)
-             {
-                 // progression tracking code
-             }
+                            progress:nil
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
              {
                  if (image)
                  {
-                     // do something with image
+                     [self saveImageToPhotos:image];
                  }
              }];
-            [self saveImageToPhotos:savedImage];
-            
         }
             break;
+            
 #pragma mark  分享按钮事件处理
         case zxTabBarButtonBaseTag+2:
         {
