@@ -143,7 +143,20 @@
             
            NSLog(@"%s [LINE:%d] image_url=%@", __func__, __LINE__,image_url);
             UIImage *savedImage = [UIImage imageNamed:@"oneStar"];
-            
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            [manager downloadWithURL:imageURL
+                             options:0
+                            progress:^(NSInteger receivedSize, NSInteger expectedSize)
+             {
+                 // progression tracking code
+             }
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
+             {
+                 if (image)
+                 {
+                     // do something with image
+                 }
+             }];
             [self saveImageToPhotos:savedImage];
             
         }
