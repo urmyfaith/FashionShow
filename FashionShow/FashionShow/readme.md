@@ -378,7 +378,7 @@ NSValue包装对象指针，CGRect结构体等
   
 @end
 
-## 问题17  保存图片到到相册
+## 问题17  保存图片到到相册-- 已解决
 
 UIImageWriteToSavedPhotosAlbum 方法是UIKit中的方法（C语言方法）
 
@@ -416,6 +416,109 @@ UIImageWriteToSavedPhotosAlbum 方法是UIKit中的方法（C语言方法）
 - https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/#//apple_ref/c/func/UIImageWriteToSavedPhotosAlbum
 - http://www.cnblogs.com/85538649/archive/2011/12/05/2276901.html
 - http://stackoverflow.com/questions/7628048/ios-uiimagewritetosavedphotosalbum
+
+##  复习,友盟分享 --友盟
+
+
+### 第一步: 导入库
+
+- Security.framework,
+- libiconv.dylib,
+- SystemConfiguration.framework,
+- CoreGraphics.framework，
+- libsqlite3.dylib，
+- CoreTelephony.framework,
+- libstdc++.dylib,
+- libz.dylib。
+
+### 第二步:初始化友盟库
+
+(1)先包含头文件
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "TencentOpenAPI/QQApiInterface.h"
+#import "TencentOpenAPI/TencentOAuth.h"
+
+
+(2)加载时---初始化并且设置AppKey
+
+```
+-(void)createUmeng{
+
+[UMSocialData setAppKey:zxYOUMENG_APPKEY];
+
+NSString *url = @"http://zuoxue.sinaapp.com/UISettingResources/userInfo.json";
+
+[UMSocialWechatHandler setWXAppId:zxWEIXIN_APPKEY
+url:url];
+
+[UMSocialConfig setQQAppId:zxQQ_APPKEY
+url:url
+importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
+
+}
+```
+
+### 第三步:调用,使用分享:
+
+```
+/*==========导入友盟库===========*/
+#import "UMSocial.h"
+```
+
+分享需要指定,a)分享的文字,b)分享的图片,c)分享的平台
+
+> 分享方式一:(不使用代理)
+
+```
+//简单处理,不使用代理,需要设置 -->[图片],[文字],[分享平台];
+[UMSocialSnsService presentSnsIconSheetView:curren_vc
+appKey:zxYOUMENG_APPKEY
+shareText:[NSString stringWithFormat:@"我在看%@ ,",_downlaod_url]
+shareImage:_shareImage
+shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,
+UMShareToTencent,
+UMShareToWechatTimeline,
+UMShareToQzone,
+nil]
+delegate:nil];
+```
+
+> 分享方式二:(使用代理)
+
+```
+//使用代理,需要设置 -->[图片],[文字],[分享平台];
+UIActionSheet *sheet =[ [UIActionSheet alloc]initWithTitle:@"分享"
+delegate:self
+cancelButtonTitle:@"取消"
+destructiveButtonTitle:nil
+otherButtonTitles:@"新浪微博",@"腾讯微博",@"朋友圈",@"QQ空间", nil];
+[sheet showInView:self];
+```
+代理方法:
+
+```
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+if(buttonIndex < 5){
+
+NSString *shareText = [NSString stringWithFormat:@"我在看%@ ,",_downlaod_url];
+
+[[UMSocialControllerService defaultControllerService] setShareText:shareText shareImage:_shareImage socialUIDelegate:nil];
+
+NSArray *sharePlatforms = @[UMShareToSina,UMShareToTencent,UMShareToWechatTimeline,UMShareToQzone];
+
+UMSocialSnsPlatform *platform = [UMSocialSnsPlatformManager getSocialPlatformWithName:sharePlatforms[buttonIndex]];
+
+platform.snsClickHandler(_currentClassObject,[UMSocialControllerService defaultControllerService],YES);
+}
+}
+```
+
+
+
+
+
 
 #todo 代码的复用,单行图片在左还是在右的代码的复用?
 

@@ -34,6 +34,9 @@
  */
 #import "iToast.h"
 
+/*==========导入友盟库===========*/
+#import "UMSocial.h"
+
 /**
  *  详细页面的ToolBar:返回前一页,分享,收藏,评论
  */
@@ -41,6 +44,10 @@
 @implementation ZXTabBar
 {
     id _currentClassObject;
+    NSString *_downlaod_url;
+    NSString *_article_id;
+    NSString *_image_url;
+   __block UIImage *_shareImage;
 }
 - (id)initWithFrame:(CGRect)frame
 {
@@ -99,11 +106,6 @@
 
     UIViewController *curren_vc = (UIViewController *)_currentClassObject;
 
-
-    NSString *downlaod_url = nil;
-    NSString *article_id = nil;
-    NSString *image_url = nil;
-    
     
     /*
      1.返回，无需特殊数据
@@ -117,15 +119,27 @@
     {
         GenericModel *gm  = (GenericModel *) [ ((PhotosViewController* )curren_vc).dataSource_mArray
                                                 objectAtIndex:( (PhotosViewController* )curren_vc).currentPage ];
-        image_url = gm.icon;
-        article_id = gm.id;
-        downlaod_url = ((PhotosViewController* )curren_vc).urlIdentifier;
+        _image_url = gm.icon;
+        _article_id = gm.id;
+        _downlaod_url = ((PhotosViewController* )curren_vc).urlIdentifier;
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadWithURL:_image_url
+                         options:0
+                        progress:nil
+                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
+         {
+             if (image)
+             {
+                 _shareImage = image;
+             }
+         }];
     }
     if([curren_vc isKindOfClass:[WebViewController class]]){
-        article_id = ((WebViewController*)curren_vc).article_id;
-        downlaod_url = ((WebViewController*)curren_vc).urlIdentifier;
+        _article_id = ((WebViewController*)curren_vc).article_id;
+        _downlaod_url = ((WebViewController*)curren_vc).urlIdentifier;
+
     }
-    NSLog(@"%s %d -- image_url=%@, article_id=%@ downlaod_url=%@",__func__,__LINE__,image_url,article_id,downlaod_url);
+    NSLog(@"%s %d -- image_url=%@, article_id=%@ downlaod_url=%@",__func__,__LINE__,_image_url,_article_id,_downlaod_url);
     
     switch (button.tag) {
             
@@ -140,28 +154,40 @@
 #pragma mark  下载按钮事件处理
         case zxTabBarButtonBaseTag+1:
         {
-            
-           NSLog(@"%s [LINE:%d] image_url=%@", __func__, __LINE__,image_url);
-            SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            [manager downloadWithURL:image_url
-                             options:0
-                            progress:nil
-                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
-             {
-                 if (image)
-                 {
-                     [self saveImageToPhotos:image];
-                 }
-             }];
+            NSLog(@"%s [LINE:%d] image_url=%@", __func__, __LINE__,_image_url);
+            [self saveImageToPhotos:_shareImage];
         }
             break;
             
-#pragma mark  分享按钮事件处理
+#pragma mark  分享按钮事件处理 --友盟分享
         case zxTabBarButtonBaseTag+2:
         {
-           NSLog(@"%s [LINE:%d] image_url=%@ or downlaod_url=%@", __func__, __LINE__,image_url,downlaod_url);
+           NSLog(@"%s [LINE:%d] image_url=%@ or downlaod_url=%@", __func__, __LINE__,_image_url,_downlaod_url);
+#if 0
+            //使用代理,需要设置 -->[图片],[文字],[分享平台];
+            UIActionSheet *sheet =[ [UIActionSheet alloc]initWithTitle:@"分享"
+                                                              delegate:self
+                                                     cancelButtonTitle:@"取消"
+                                                destructiveButtonTitle:nil
+                                                     otherButtonTitles:@"新浪微博",@"腾讯微博",@"朋友圈",@"QQ空间", nil];
+            [sheet showInView:self];
+#else
+            //简单处理,不使用代理,需要设置 -->[图片],[文字],[分享平台];
+            [UMSocialSnsService presentSnsIconSheetView:curren_vc
+                                                 appKey:zxYOUMENG_APPKEY
+                                              shareText:[NSString stringWithFormat:@"我在看%@ ,",_downlaod_url]
+                                             shareImage:_shareImage
+                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,
+                                                         UMShareToTencent,
+                                                         UMShareToWechatTimeline,
+                                                         UMShareToQzone,
+                                                         nil]
+                                               delegate:nil];
+#endif
+            
         }
             break;
+            
 #pragma mark  收藏按钮事件处理
         case zxTabBarButtonBaseTag+3:
         {
@@ -186,6 +212,29 @@
             [curren_vc.navigationController pushViewController:svc animated:YES];
         }
             break;
+    }
+}
+
+#pragma mark 友盟分享 -- 使用代理方法
+
+/**
+ 1. 给单例对象设置值
+ 2. 分享到哪些平台?
+ 3. 执行分享方法
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(buttonIndex < 5){
+        
+        NSString *shareText = [NSString stringWithFormat:@"我在看%@ ,",_downlaod_url];
+        
+        [[UMSocialControllerService defaultControllerService] setShareText:shareText shareImage:_shareImage socialUIDelegate:nil];
+        
+        NSArray *sharePlatforms = @[UMShareToSina,UMShareToTencent,UMShareToWechatTimeline,UMShareToQzone];
+        
+        UMSocialSnsPlatform *platform = [UMSocialSnsPlatformManager getSocialPlatformWithName:sharePlatforms[buttonIndex]];
+        
+        platform.snsClickHandler(_currentClassObject,[UMSocialControllerService defaultControllerService],YES);
     }
 }
 

@@ -14,12 +14,22 @@
 #import "ZXTabBarVC.h"
 
 
+/*==========导入友盟的库===========*/
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "TencentOpenAPI/QQApiInterface.h"
+#import "TencentOpenAPI/TencentOAuth.h"
+
+
 @implementation ZXAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    
+    [self createUmeng];
     
 #define TEST NO
     if (TEST) {
@@ -45,6 +55,23 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+-(void)createUmeng{
+    
+    [UMSocialData setAppKey:zxYOUMENG_APPKEY];
+    
+    NSString *url = @"http://zuoxue.sinaapp.com/UISettingResources/userInfo.json";
+    
+    [UMSocialWechatHandler setWXAppId:zxWEIXIN_APPKEY
+                                  url:url];
+    
+    [UMSocialConfig setQQAppId:zxQQ_APPKEY
+                           url:url
+                 importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
+    
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

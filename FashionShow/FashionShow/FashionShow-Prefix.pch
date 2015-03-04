@@ -48,4 +48,9 @@
  */
 #import "INTERFACE.h"
 
+/**
+ *  导入友盟需要的APPKEY
+ */
+#import "KEYS.h"
+
 #endif
