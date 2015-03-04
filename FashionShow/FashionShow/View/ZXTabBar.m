@@ -269,6 +269,11 @@
 #endif
 }
 
+#pragma mark 保存图片到相册的回调方法
+
+/*
+ 判断是否保存成功,然后弹出消息
+ */
 - (void)image:(UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
     NSString *msg = nil ;
     if(error != nil){

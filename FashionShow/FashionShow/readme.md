@@ -433,7 +433,11 @@ UIImageWriteToSavedPhotosAlbum 方法是UIKit中的方法（C语言方法）
 
 ### 第二步:初始化友盟库
 
+https://github.com/urmyfaith/FashionShow/blob/e6eaeba7ef57d44019cea45e1359eeb444184e15/FashionShow/FashionShow/ZXAppDelegate.m#L60-72
+
 (1)先包含头文件
+
+
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "TencentOpenAPI/QQApiInterface.h"
@@ -468,6 +472,8 @@ importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
 
 分享需要指定,a)分享的文字,b)分享的图片,c)分享的平台
 
+https://github.com/urmyfaith/FashionShow/blob/e6eaeba7ef57d44019cea45e1359eeb444184e15/FashionShow/FashionShow/View/ZXTabBar.m#L166-188
+
 > 分享方式一:(不使用代理)
 
 ```
@@ -496,6 +502,8 @@ otherButtonTitles:@"新浪微博",@"腾讯微博",@"朋友圈",@"QQ空间", nil]
 [sheet showInView:self];
 ```
 代理方法:
+
+https://github.com/urmyfaith/FashionShow/blob/e6eaeba7ef57d44019cea45e1359eeb444184e15/FashionShow/FashionShow/View/ZXTabBar.m#L218-238
 
 ```
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
