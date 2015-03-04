@@ -1,0 +1,38 @@
+
+
+
+
+
+表名:
+
+TBL_ARTICLEREAD  TBL_DBMS         TBL_FAVDATA    
+TBL_COLUMNS      TBL_DBMSAPP      TBL_FULLAD     
+TBL_DBINFO       TBL_DBMSARTICLE  TBL_TWOCOLUMNS
+
+字段名:
+
+CREATE TABLE TBL_DBMS (id INTEGER PRIMARY KEY AUTOINCREMENT, uuid INTEGER, bupload INTEGER, type varchar(20));
+CREATE TABLE TBL_DBMSAPP (id INTEGER PRIMARY KEY AUTOINCREMENT, uuid INTEGER, type varchar(20), starttime varchar(20), endtime varchar(20), brun INTEGER);
+CREATE TABLE TBL_DBMSARTICLE (id INTEGER PRIMARY KEY AUTOINCREMENT, uuid INTEGER, articleid varchar(20), type varchar(20), starttime varchar(20), endtime varchar(20), openmode varchar(20), bread INTEGER);
+CREATE TABLE TBL_ARTICLEREAD (id INTEGER PRIMARY KEY AUTOINCREMENT, articleid varchar(20));
+CREATE TABLE TBL_FAVDATA (id INTEGER PRIMARY KEY AUTOINCREMENT, favid varchar(20), json TEXT, type INTEGER);
+CREATE TABLE TBL_COLUMNS (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, columns_name varchar(20));
+CREATE TABLE TBL_TWOCOLUMNS (id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(100), columns varchar(20), sa varchar(20), lastupdate varchar(20), orderby INTEGER);
+CREATE TABLE TBL_FULLAD (id INTEGER PRIMARY KEY AUTOINCREMENT, uuid varchar(20), stime varchar(20), etime varchar(20), times varchar(20), type varchar(20), src varchar(100), url varchar(100), download BOOLEAN, invalid BOOLEAN);
+CREATE TABLE TBL_DBINFO (id INTEGER PRIMARY KEY AUTOINCREMENT, version varchar(20));
+
+数据库查询:
+
+sqlite> select * from TBL_ARTICLEREAD;
+id          articleid 
+----------  ----------
+1           aaaa      
+2           aaaa      
+3           aaaa      
+4           aaaa
+
+
+id          version   
+----------  ----------
+1           1.0
+

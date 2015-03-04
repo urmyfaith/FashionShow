@@ -1,0 +1,226 @@
+
+00首页:
+(get和post请求都可以.)
+- url http://qqssbb.cms.handleader.com/api_v2.php?action=home
+- 接口类型post
+
+- 请求体 sa=Main&offset=0&count=20&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+拼接完整:http://qqssbb.cms.handleader.com/api_v2.php?action=home&sa=Main&offset=0&count=20&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+http://qqssbb.cms.handleader.com/api_v2.php?action=article&id=2209&uid=11111111&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37&platform=a&pid=10129&mobile=HUAWEI+P6-C00&fontsize=m
+
+
+
+
+列表页面
+(get和post请求都可以)
+	- http://qqssbb.cms.handleader.com/api_v2.php?action=list
+	- 接口类型为post	
+	- 请求体:
+	sa=MX&offset=36&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+完整地址:
+http://qqssbb.cms.handleader.com/api_v2.php?action=list&sa=MX&offset=36&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+
+列表详情:
+http://qqssbb.cms.handleader.com/api_v2.php?action=buyinfo&id=2209
+
+http://qqssbb.cms.handleader.com/api_v2.php?action=article&id=2209&uid=11111111&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37&platform=a&pid=10129&mobile=HUAWEI+P6-C00&fontsize=m
+
+格式html
+
+列表页面详情
+	- url http://qqssbb.cms.handleader.com/api_v2.php?action=article&id=2211&uid=11111111&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37&platform=a&pid=10129&mobile=HUAWEI+P6-C00&fontsize=m
+	- 请求类型get
+	- 参数在url里
+action=article&id=2209&uid=11111111&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37&platform=a&pid=10129&mobile=HUAWEI+P6-C00&fontsize=m
+
+时装页面
+
+1)美搭
+ -url  http://qqssbb.cms.handleader.com/api_v2.php?action=piclist
+- 请求类型 post
+- 请求体 
+sa=MD&offset=0&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+2)导购
+ -url  http://qqssbb.cms.handleader.com/api_v2.php?action=piclist
+- 请求类型 post
+- 请求体 
+sa=DG&offset=0&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+
+时装详情
+-url http://qqssbb.cms.handleader.com/api_v2.php?action=picture
+-请求类型 post
+-请求体
+gid=1906&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+gid参数
+
+
+
+
+美容页面
+
+	- http://qqssbb.cms.handleader.com/api_v2.php?action=list
+	- 接口类型为post	
+	- 请求体:
+	sa=MR&offset=36&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+请求体sa参数改为MR
+
+
+
+生活页面
+
+	- http://qqssbb.cms.handleader.com/api_v2.php?action=list
+	- 接口类型为post	
+	- 请求体:
+	sa=SH&offset=36&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+请求体sa参数改为SH
+
+
+
+视觉页面
+
+	- http://qqssbb.cms.handleader.com/api_v2.php?action=list
+	- 接口类型为post	
+	- 请求体:
+	sa=SJ&offset=36&count=18&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+请求体sa参数改为SJ
+
+
+视觉详情页面
+
+-url http://qqssbb.cms.handleader.com/api_v2.php?action=picture
+- 请求类型post
+- 请求体 gid=1741&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+
+
+
+
+
+## 数据模型:
+
+JSON:
+    -首页
+        图片,id,标题,描述,添加日期,时间戳,
+        "icon": "http://qqssbb.cms.handleader.com/upload//day_150204/201502041314300_header_iphone4.jpg",
+       "id": "2214",
+       "title": "艾玛斯通时髦街拍 9件单品不能少",
+       "des": "",
+       "adddate": "2015-02-04",
+      "timestamp": "1423027189"
+
+    -明星
+      " type": "small",
+      "title_position": "",
+      "icon": "http://qqssbb.cms.handleader.com/upload//day_150104/201501040925276_home_iphone4.jpg",
+      "id": "2177",
+      "title": "李敖炮轰髙丽 全球美女榜出炉",
+      "des": "",
+      "adddate": "2015-01-04",
+      "timestamp": "1420335551",
+      "buy": "0",
+      "tag": ""
+    - 美容
+        list": [
+        {
+          "type": "small",
+          "title_position": "",
+          "icon": "http://qqssbb.cms.handleader.com/upload//day_140814/201408140936510_home_iphone4.jpg",
+          "id": "1986",
+          "title": "底妆清透看得见 1分钟上妆你能做到吗？",
+          "des": "",
+          "adddate": "2014-08-14",
+          "timestamp": "1407980352",
+          "buy": "0",
+          "tag": ""
+        },
+    -生活
+    "type": "small",
+      "title_position": "",
+      "icon": "http://qqssbb.cms.handleader.com/upload//day_140801/201408010947081_home_iphone4.jpg",
+      "id": "1967",
+      "title": "宝格丽推出全新Diagono Ultranero计时腕表",
+      "des": "",
+      "adddate": "2014-08-01",
+      "timestamp": "1406857920",
+      "buy": "0",
+      "tag": ""
+
+    -视觉
+    "type": "small",
+      "title_position": "",
+      "icon": "http://qqssbb.cms.handleader.com/upload//day_140513/201405131410222_home_iphone4.jpg",
+      "id": "1810",
+      "title": "巩俐：永远的电影女王",
+      "des": "",
+      "adddate": "2014-05-13",
+      "timestamp": "1399961522",
+      "buy": "0",
+      "tag": "
+
+JSON:美搭,导购,
+
+ "list": [
+    {
+      "icon": "http://qqssbb.cms.handleader.com/upload//day_140626/201406261031113_home_iphone4.jpg",
+      "gid": "1906",
+      "title": "男装周博主推荐Vol8 逗逼王子穿白纱",
+      "pic_height": 317,
+      "timestamp": "1403749740"
+    },
+ "list": [
+    {
+      "icon": "http://qqssbb.cms.handleader.com/upload//day_140528/201405281150413_home_iphone4.jpg",
+      "gid": "1827",
+      "title": "宇舶表2014 年FIFA巴西世界杯™官方手表",
+      "pic_height": 281,
+      "timestamp": "1401248880"
+    },
+
+     "list": [
+    {
+      "icon": "http://qqssbb.cms.handleader.com/upload//day_140814/201408140936510_home_iphone4.jpg",
+      "gid": "1986",
+      "title": "底妆清透看得见 1分钟上妆你能做到吗？",
+      "pic_height": 158,
+      "timestamp": "1407980100"
+    },
+
+JSON:视觉详情
+
+    "icon": "http://qqssbb.cms.handleader.com/upload//day_140214/201402141021468.jpg",
+      "title": "米娅·华希科沃斯卡登VOGUE 化身海之女神",
+      "author": "",
+      "des": "米娅·华希科沃斯卡登VOGUE 化身海之女神",
+      "id": "1741"
+
+
+html:首页详细:
+    http://qqssbb.cms.handleader.com/api_v2.php?action=article&id=2214&uid=11111111&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37&platform=a&pid=10129&mobile=HUAWEI+P6-C00&fontsize=m
+
+html:明星详情:
+
+    http://qqssbb.cms.handleader.com/api_v2.php?action=article&id=2209&uid=11111111&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37&platform=a&pid=10129&mobile=HUAWEI+P6-C00&fontsize=m
+    
+    
+评论接口
+    - http://qqssbb.cms.handleader.com/api_v2.php
+    action=wzpl&id=2214&name=zx&content=hello&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37
+    - 两个参数,action,id,content
+
+    --->响应:
+            {
+            "msg": "评论成功",
+            "code": "1"
+            }
+
+
+
