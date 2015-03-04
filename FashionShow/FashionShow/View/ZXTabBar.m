@@ -29,6 +29,10 @@
 #import "ZXTabBarVC.h"
 
 
+/**
+ *  引入弹出消息提示框
+ */
+#import "iToast.h"
 
 /**
  *  详细页面的ToolBar:返回前一页,分享,收藏,评论
@@ -138,7 +142,7 @@
         {
             
            NSLog(@"%s [LINE:%d] image_url=%@", __func__, __LINE__,image_url);
-            UIImage *savedImage = [UIImage imageNamed:@"背景"];
+            UIImage *savedImage = [UIImage imageNamed:@"oneStar"];
             
             [self saveImageToPhotos:savedImage];
             
@@ -177,30 +181,49 @@
     }
 }
 
+#pragma mark 保存图片
+/**
+ *  保存图片
+ *  操作就一个C函数,可以仅使用一个参数,当然也可以使用回调方法.
+ *
+ *  @param savedImage 待保存的图片
+ */
 - (void)saveImageToPhotos:(UIImage*)savedImage
 {
+
+#if 1
     UIImageWriteToSavedPhotosAlbum(savedImage,
                                    self,
                                    @selector(image:didFinishSavingWithError:contextInfo:),
-                                   NULL);
+                                   nil);
+#else
+    UIImageWriteToSavedPhotosAlbum(savedImage,
+                                   nil,
+                                   nil,
+                                   nil);
+#endif
+    
+#if 0
+    
+    //调试的时候,使用quickLook来查看imageView,可以看到图片是存在的,全部使用nil也解决不了问题.
+    //最后发现使用高版本可以解决此问题:Xcode6+,iOS7+
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:savedImage];
+    imageView.frame =CGRectMake(100, 100, 100, 100);
+#endif
 }
 
-// 指定回调方法
-- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
-{
+- (void)image:(UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
     NSString *msg = nil ;
-    if(error != NULL){
+    if(error != nil){
         msg = @"保存图片失败" ;
     }else{
         msg = @"保存图片成功" ;
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"确定"
-                                          otherButtonTitles:nil];
-    [alert show];
+    NSLog(@"%s [LINE:%d] msg=%@", __func__, __LINE__,msg);
+    [[[iToast makeText:msg ]setDuration:iToastDurationNormal] show];
 }
+
+
 
 
 

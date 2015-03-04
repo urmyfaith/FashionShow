@@ -5,48 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0529470D-F6B3-40D9-BE0B-99E91038A78D</string>
+	<string>D439A348-3FD6-4003-9058-0F8E344B0AC6</string>
 	<key>IDESourceControlProjectName</key>
 	<string>FashionShow</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>08157794-CC70-4643-A92A-4D5B4DE4A271</key>
-		<string>ssh://github.com/urmyfaith/roadofios.git</string>
-		<key>2CE2EB88-4A76-4806-A0EE-347F231BC29D</key>
-		<string>ssh://github.com/urmyfaith/roadofios.git</string>
+		<key>27CFECF2-C4F3-419A-B24A-61570A538CA3</key>
+		<string>ssh://github.com/urmyfaith/FashionShow.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>advancedUI/week14/FashionShow/FashionShow.xcodeproj/project.xcworkspace</string>
+	<string>FashionShow/FashionShow.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>08157794-CC70-4643-A92A-4D5B4DE4A271</key>
-		<string>../../../../..</string>
-		<key>2CE2EB88-4A76-4806-A0EE-347F231BC29D</key>
-		<string>../../../../../../../../Documents/github/roadofios</string>
+		<key>27CFECF2-C4F3-419A-B24A-61570A538CA3</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/urmyfaith/roadofios.git</string>
+	<string>ssh://github.com/urmyfaith/FashionShow.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>08157794-CC70-4643-A92A-4D5B4DE4A271</string>
+	<string>27CFECF2-C4F3-419A-B24A-61570A538CA3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>08157794-CC70-4643-A92A-4D5B4DE4A271</string>
+			<string>27CFECF2-C4F3-419A-B24A-61570A538CA3</string>
 			<key>IDESourceControlWCCName</key>
-			<string>roadofios</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2CE2EB88-4A76-4806-A0EE-347F231BC29D</string>
-			<key>IDESourceControlWCCName</key>
-			<string>roadofios</string>
+			<string>FashionShow</string>
 		</dict>
 	</array>
 </dict>

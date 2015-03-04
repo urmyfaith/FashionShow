@@ -400,16 +400,22 @@ UIImageWriteToSavedPhotosAlbum 方法是UIKit中的方法（C语言方法）
     }else{
         msg = @"保存图片成功" ;
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"确定"
-                                          otherButtonTitles:nil];
-    [alert show];
 }
 ```
 
-- 参考资料  http://blog.csdn.net/hengshujiyi/article/details/22879495
+使用nil仍然出不了
+
+> 最后的解决
+
+>> 使用Xcode6.1和iphone5模拟器就好了.
+
+>> 在Xcode5.1中使用的话,保存不成功.
+
+
+- http://blog.csdn.net/hengshujiyi/article/details/22879495
+- https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/#//apple_ref/c/func/UIImageWriteToSavedPhotosAlbum
+- http://www.cnblogs.com/85538649/archive/2011/12/05/2276901.html
+- http://stackoverflow.com/questions/7628048/ios-uiimagewritetosavedphotosalbum
 
 #todo 代码的复用,单行图片在左还是在右的代码的复用?
 
