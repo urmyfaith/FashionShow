@@ -9,7 +9,10 @@
 #import "SettingViewController.h"
 #import "CollectionViewController.h"
 
-@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+//导入友盟分享库
+#import "UMSocial.h"
+
+@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 
 @end
 
@@ -113,6 +116,13 @@
                 case 0:
                 {
                     NSLog(@"%s [LINE:%d]", __func__, __LINE__);
+                    //使用代理,需要设置 -->[图片],[文字],[分享平台];
+                    UIActionSheet *sheet =[ [UIActionSheet alloc]initWithTitle:nil
+                                                                      delegate:self
+                                                             cancelButtonTitle:@"取消"
+                                                        destructiveButtonTitle:nil
+                                                             otherButtonTitles:@"微信好友推荐",@"微信朋友圈推荐",nil];
+                    [sheet showInView:self.view];
                 }
                     break;
                     
@@ -172,6 +182,23 @@
             break;
     }
     
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(buttonIndex < 3){
+        
+        NSString *shareText = @"全球时尚播报 __z2xy__";
+        
+        [[UMSocialControllerService defaultControllerService] setShareText:shareText
+                                                                shareImage:[UIImage imageNamed:@"logo"]
+                                                          socialUIDelegate:nil];
+        NSArray *sharePlatforms = @[UMShareToWechatSession,UMShareToWechatTimeline];
+        
+        UMSocialSnsPlatform *platform = [UMSocialSnsPlatformManager getSocialPlatformWithName:sharePlatforms[buttonIndex]];
+        
+        platform.snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+    }
 }
 
 -(CGFloat )tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

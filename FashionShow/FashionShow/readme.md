@@ -493,6 +493,10 @@ delegate:nil];
 > 分享方式二:(使用代理)
 
 ```
+@interface ZXTabBar ()<UIActionSheetDelegate>
+
+@end
+
 //使用代理,需要设置 -->[图片],[文字],[分享平台];
 UIActionSheet *sheet =[ [UIActionSheet alloc]initWithTitle:@"分享"
 delegate:self

@@ -41,6 +41,10 @@
  *  详细页面的ToolBar:返回前一页,分享,收藏,评论
  */
 
+@interface ZXTabBar ()<UIActionSheetDelegate>
+
+@end
+
 @implementation ZXTabBar
 {
     id _currentClassObject;
