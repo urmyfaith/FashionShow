@@ -128,49 +128,51 @@
                   placeholderImage:[UIImage imageNamed:@"内文缺省图"]
                            options:SDWebImageRefreshCached
                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                             /*
-                              图片宽度／图片高度  视图宽度／视图高度 ＝ 1:2 ＝ 0.5。
-                              
-                              判断，如果 图片宽度／图片高度>0.5 宽度太宽，图片宽度＝ 视图宽度，计算图片高度
-                              
-                              《 0.5，图片台高，图片高度 ＝ 视图高度，计算图片宽度。
-                              然后居中显示。
-                              */
-                             CGFloat image_W = image.size.width;
-                             CGFloat image_H = image.size.height;
-                             CGFloat scrollView_W = _mainScroolView.frame.size.width;
-                             CGFloat scrollView_H = _mainScroolView.frame.size.height;
-                             NSLog(@"调整前 %.f %.f -- %.f %.f ",image_W,image_H, scrollView_W,scrollView_H);
-                             //图片太宽＝＝＝》固定宽度，计算高度
-                             if (image_W/image_H > scrollView_W/scrollView_H) {
-                                 imageView.frame = CGRectMake(0,
-                                                              0,
-                                                              scrollView_W,
-                                                              scrollView_W/(image_W/image_H)
-                                                              );
+                             if(image){
+                                 /*
+                                  图片宽度／图片高度  视图宽度／视图高度 ＝ 1:2 ＝ 0.5。
+                                  
+                                  判断，如果 图片宽度／图片高度>0.5 宽度太宽，图片宽度＝ 视图宽度，计算图片高度
+                                  
+                                  《 0.5，图片台高，图片高度 ＝ 视图高度，计算图片宽度。
+                                  然后居中显示。
+                                  */
+                                 CGFloat image_W = image.size.width;
+                                 CGFloat image_H = image.size.height;
+                                 CGFloat scrollView_W = _mainScroolView.frame.size.width;
+                                 CGFloat scrollView_H = _mainScroolView.frame.size.height;
+                                 NSLog(@"调整前 %.f %.f -- %.f %.f ",image_W,image_H, scrollView_W,scrollView_H);
+                                 //图片太宽＝＝＝》固定宽度，计算高度
+                                 if (image_W/image_H > scrollView_W/scrollView_H) {
+                                     imageView.frame = CGRectMake(0,
+                                                                  0,
+                                                                  scrollView_W,
+                                                                  scrollView_W/(image_W/image_H)
+                                                                  );
+                                     
+                                     
+                                     NSLog(@"初步调整：width=%.f HEIGTH---->%.f",scrollView_W,scrollView_W/(image_W/image_H));
+                                 }
+                                 //图片太高＝＝＝》固定高度
+                                 else{
+                                     imageView.frame = CGRectMake(0,
+                                                                  0,
+                                                                  (image_W/image_H)*scrollView_H,
+                                                                  scrollView_H
+                                                                  );
+                                     NSLog(@"初步调整：WIDTH=%.f<---- height=%.f",(image_W/image_H)*scrollView_H,scrollView_H);
+                                 }
+                                 if (imageView.frame.size.width< scrollView_W) {
+                                     imageView.frame = CGRectMake(0,0,scrollView_W,imageView.frame.size.height);
+                                 }
+                                 NSLog(@"最后的frame：width=%.f---- height=%.f",imageView.frame.size.width,imageView.frame.size.height);
+                                 NSLog(@"   ");
                                  
+                                 imageView.center = CGPointMake(xPos + _mainScroolView.frame.size.width/2,
+                                                                _mainScroolView.frame.size.height/2);
                                  
-                                 NSLog(@"初步调整：width=%.f HEIGTH---->%.f",scrollView_W,scrollView_W/(image_W/image_H));
+                                 [self.imageView_originalFrame_mDic setObject:[NSValue valueWithCGRect: imageView.frame ] forKey:@(index)];
                              }
-                             //图片太高＝＝＝》固定高度
-                             else{
-                                 imageView.frame = CGRectMake(0,
-                                                              0,
-                                                              (image_W/image_H)*scrollView_H,
-                                                              scrollView_H
-                                                              );
-                                 NSLog(@"初步调整：WIDTH=%.f<---- height=%.f",(image_W/image_H)*scrollView_H,scrollView_H);
-                             }
-                             if (imageView.frame.size.width< scrollView_W) {
-                                 imageView.frame = CGRectMake(0,0,scrollView_W,imageView.frame.size.height);
-                             }
-                             NSLog(@"最后的frame：width=%.f---- height=%.f",imageView.frame.size.width,imageView.frame.size.height);
-                             NSLog(@"   ");
-                             
-                             imageView.center = CGPointMake(xPos + _mainScroolView.frame.size.width/2,
-                                                            _mainScroolView.frame.size.height/2);
-
-                             [self.imageView_originalFrame_mDic setObject:[NSValue valueWithCGRect: imageView.frame ] forKey:@(index)];
                          }];
         [_mainScroolView addSubview:imageView];
     

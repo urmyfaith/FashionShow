@@ -113,10 +113,10 @@
     
     /*
      1.返回，无需特殊数据
-     2.下载，下载需要当前页面的［图片地址］
-     3.分享，需要当前页面的［数据模型］／［链接］－－－－》 一张图片 ｜ 链接＝＝》短链接
-     4.收藏，收藏需要当前的［数据模型］／［链接］－－－－》图片／数据模型  ｜ 链接
-     5.评论，需要［数据模型］／［链接］         －－－－－》得到文章id
+     2.下载，下载需要当前页面的［图片地址］ ---完成
+     3.分享，需要当前页面的［数据模型］／［链接］－－－－》 一张图片 ｜ 链接＝＝》短链接 ---完成
+     4.收藏，收藏需要当前的［数据模型］／［链接］－－－－》图片／数据模型  ｜ 链接 #todo
+     5.评论，需要［数据模型］／［链接］         －－－－－》得到文章id  #todo
      */
     
     if([curren_vc isKindOfClass:[PhotosViewController class]])
@@ -209,10 +209,7 @@
             NSLog(@"%s [LINE:%d] 点击了评论", __func__, __LINE__);
 
             ShowCommentsViewController *svc = [[ShowCommentsViewController alloc]init];
-            //[ curren_vcisKindOfClass:[WebViewController class]]
-            if ([curren_vc isKindOfClass:NSClassFromString(@"WebViewController")]) {
-                svc.comment_article_id = ((WebViewController *)curren_vc).article_id;
-            }
+            svc.comment_article_id = _article_id;
             [curren_vc.navigationController pushViewController:svc animated:YES];
         }
             break;
