@@ -132,12 +132,12 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%s [LINE:%d] indexPatsh=%d", __func__, __LINE__,indexPath.row);
+    NSLog(@"%s [LINE:%d] indexPatsh=%ld", __func__, __LINE__,indexPath.row);
     PhotosViewController *photoVC = [[PhotosViewController alloc]init];
     BeautyModel *model = (BeautyModel *)[_collectionViewDateSource_array objectAtIndex:indexPath.row];
     
     photoVC.gid =  model.id;  //用于webView地址的拼接
-    
+    photoVC.type = zxDBRecordTypeWithPhotoViewSJ;//标记来自视觉页面;
     ZXTabBarVC *tvc = [ZXTabBarVC sharedZXTabBarViewController];
     tvc.customTabBar.hidden = YES;
     

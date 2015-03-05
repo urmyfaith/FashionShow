@@ -133,7 +133,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%s [LINE:%d] indexPatsh=%d", __func__, __LINE__,indexPath.row);
+    NSLog(@"%s [LINE:%d] indexPatsh=%ld", __func__, __LINE__,(long)indexPath.row);
     WebViewController *webVC = [[WebViewController alloc]init];
     GenericModel *model = (GenericModel *)[_collectionViewDateSource_array objectAtIndex:indexPath.row];
     

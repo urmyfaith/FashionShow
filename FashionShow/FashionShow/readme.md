@@ -417,119 +417,102 @@ UIImageWriteToSavedPhotosAlbum 方法是UIKit中的方法（C语言方法）
 - http://www.cnblogs.com/85538649/archive/2011/12/05/2276901.html
 - http://stackoverflow.com/questions/7628048/ios-uiimagewritetosavedphotosalbum
 
-##  复习,友盟分享 --友盟
+##  复习,友盟分享 --友盟  ---完成
 
 
-### 第一步: 导入库
+更新:
 
-- Security.framework,
-- libiconv.dylib,
-- SystemConfiguration.framework,
-- CoreGraphics.framework，
-- libsqlite3.dylib，
-- CoreTelephony.framework,
-- libstdc++.dylib,
-- libz.dylib。
+友盟分享:
 
-### 第二步:初始化友盟库
+使用iOS8的时候,需要使用64位的分享版本,[注意],下载的时候一定要下载对应的版本.(32位版本和64位版本)
 
-https://github.com/urmyfaith/FashionShow/blob/e6eaeba7ef57d44019cea45e1359eeb444184e15/FashionShow/FashionShow/ZXAppDelegate.m#L60-72
+### 基础的友盟分享
 
-(1)先包含头文件
+1. 导入下载的库
 
-
-#import "UMSocial.h"
-#import "UMSocialWechatHandler.h"
-#import "TencentOpenAPI/QQApiInterface.h"
-#import "TencentOpenAPI/TencentOAuth.h"
-
-
-(2)加载时---初始化并且设置AppKey
 
 ```
--(void)createUmeng{
-
-[UMSocialData setAppKey:zxYOUMENG_APPKEY];
-
-NSString *url = @"http://zuoxue.sinaapp.com/UISettingResources/userInfo.json";
-
-[UMSocialWechatHandler setWXAppId:zxWEIXIN_APPKEY
-url:url];
-
-[UMSocialConfig setQQAppId:zxQQ_APPKEY
-url:url
-importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
-
-}
-```
-
-### 第三步:调用,使用分享:
-
-```
-/*==========导入友盟库===========*/
+/*==========导入友盟的库===========*/
 #import "UMSocial.h"
 ```
 
-分享需要指定,a)分享的文字,b)分享的图片,c)分享的平台
-
-https://github.com/urmyfaith/FashionShow/blob/e6eaeba7ef57d44019cea45e1359eeb444184e15/FashionShow/FashionShow/View/ZXTabBar.m#L166-188
-
-> 分享方式一:(不使用代理)
+2.  设置key
 
 ```
-//简单处理,不使用代理,需要设置 -->[图片],[文字],[分享平台];
+    [UMSocialData setAppKey:zxYOUMENG_APPKEY];
+```
+
+3.  分享
+
+```
 [UMSocialSnsService presentSnsIconSheetView:curren_vc
 appKey:zxYOUMENG_APPKEY
 shareText:[NSString stringWithFormat:@"我在看%@ ,",_downlaod_url]
 shareImage:_shareImage
 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,
 UMShareToTencent,
-UMShareToWechatTimeline,
+UMShareToRenren,
 UMShareToQzone,
 nil]
 delegate:nil];
 ```
 
-> 分享方式二:(使用代理)
+### 分享到微信/微信朋友圈
+
+1. 设置url schema
 
 ```
-@interface ZXTabBar ()<UIActionSheetDelegate>
+选择项目>target>info>url type>填入
 
-@end
-
-//使用代理,需要设置 -->[图片],[文字],[分享平台];
-UIActionSheet *sheet =[ [UIActionSheet alloc]initWithTitle:@"分享"
-delegate:self
-cancelButtonTitle:@"取消"
-destructiveButtonTitle:nil
-otherButtonTitles:@"新浪微博",@"腾讯微博",@"朋友圈",@"QQ空间", nil];
-[sheet showInView:self];
+weixin appkey  
 ```
-代理方法:
 
-https://github.com/urmyfaith/FashionShow/blob/e6eaeba7ef57d44019cea45e1359eeb444184e15/FashionShow/FashionShow/View/ZXTabBar.m#L218-238
+2. 导入头文件
+
+```
+#import "UMSocialWechatHandler.h"
+```
+
+3.设置
+
+```
+[UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f"
+appSecret:@"db426a9829e4b49a0dcac7b4162da6b6"
+url:url];
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+return  [UMSocialSnsService handleOpenURL:url];
+}
+- (BOOL)application:(UIApplication *)application
+openURL:(NSURL *)url
+sourceApplication:(NSString *)sourceApplication
+annotation:(id)annotation{
+return  [UMSocialSnsService handleOpenURL:url];
+}
+
+
+```
+
+4.使用分享
 
 ```
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
 
-if(buttonIndex < 5){
+if(buttonIndex < 3){
 
-NSString *shareText = [NSString stringWithFormat:@"我在看%@ ,",_downlaod_url];
+NSString *shareText = @"全球时尚播报 __z2xy__";
 
-[[UMSocialControllerService defaultControllerService] setShareText:shareText shareImage:_shareImage socialUIDelegate:nil];
-
-NSArray *sharePlatforms = @[UMShareToSina,UMShareToTencent,UMShareToWechatTimeline,UMShareToQzone];
+[[UMSocialControllerService defaultControllerService] setShareText:shareText
+shareImage:[UIImage imageNamed:@"logo"]
+socialUIDelegate:nil];
+NSArray *sharePlatforms = @[UMShareToWechatSession,UMShareToWechatTimeline];
 
 UMSocialSnsPlatform *platform = [UMSocialSnsPlatformManager getSocialPlatformWithName:sharePlatforms[buttonIndex]];
 
-platform.snsClickHandler(_currentClassObject,[UMSocialControllerService defaultControllerService],YES);
+platform.snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
 }
 }
 ```
-
-
-
-
 
 
 #todo 代码的复用,单行图片在左还是在右的代码的复用?

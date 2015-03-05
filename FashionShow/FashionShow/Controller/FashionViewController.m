@@ -294,7 +294,8 @@ typedef enum {
     FashionModel *model = (FashionModel *)[_models_mArray objectAtIndex:index];
     
     photoVC.gid =  model.gid;  //用于webView地址的拼接
-
+    photoVC.type = zxDBRecordTypeWithPhotoViewSZ;//标记来自时装页面;
+    
     ZXTabBarVC *tvc = [ZXTabBarVC sharedZXTabBarViewController];
     tvc.customTabBar.hidden = YES;
     

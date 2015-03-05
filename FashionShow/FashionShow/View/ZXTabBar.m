@@ -41,6 +41,12 @@
  *  详细页面的ToolBar:返回前一页,分享,收藏,评论
  */
 
+/**
+ *  导入数据库
+ *
+ */
+#import "ZXDataCenter.h"
+
 @interface ZXTabBar ()<UIActionSheetDelegate>
 
 @end
@@ -50,7 +56,10 @@
     id _currentClassObject;
     NSString *_downlaod_url;
     NSString *_article_id;
+    NSString *_article_title;
     NSString *_image_url;
+    zxDBRecordType _recoredType;
+    
    __block UIImage *_shareImage;
 }
 - (id)initWithFrame:(CGRect)frame
@@ -110,7 +119,6 @@
 
     UIViewController *curren_vc = (UIViewController *)_currentClassObject;
 
-    
     /*
      1.返回，无需特殊数据
      2.下载，下载需要当前页面的［图片地址］ ---完成
@@ -126,6 +134,8 @@
         _image_url = gm.icon;
         _article_id = gm.id;
         _downlaod_url = ((PhotosViewController* )curren_vc).urlIdentifier;
+        _recoredType = ((PhotosViewController*)curren_vc).type;
+        
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         [manager downloadWithURL:_image_url
                          options:0
@@ -141,7 +151,8 @@
     if([curren_vc isKindOfClass:[WebViewController class]]){
         _article_id = ((WebViewController*)curren_vc).article_id;
         _downlaod_url = ((WebViewController*)curren_vc).urlIdentifier;
-
+        _recoredType = zxDBRecordTypeWithWebView;
+        _article_title =((WebViewController*)curren_vc).article_title;
     }
     NSLog(@"%s %d -- image_url=%@, article_id=%@ downlaod_url=%@",__func__,__LINE__,_image_url,_article_id,_downlaod_url);
     
@@ -167,27 +178,17 @@
         case zxTabBarButtonBaseTag+2:
         {
            NSLog(@"%s [LINE:%d] image_url=%@ or downlaod_url=%@", __func__, __LINE__,_image_url,_downlaod_url);
-#if 0
-            //使用代理,需要设置 -->[图片],[文字],[分享平台];
-            UIActionSheet *sheet =[ [UIActionSheet alloc]initWithTitle:@"分享"
-                                                              delegate:self
-                                                     cancelButtonTitle:@"取消"
-                                                destructiveButtonTitle:nil
-                                                     otherButtonTitles:@"新浪微博",@"腾讯微博",@"朋友圈",@"QQ空间", nil];
-            [sheet showInView:self];
-#else
-            //简单处理,不使用代理,需要设置 -->[图片],[文字],[分享平台];
+
             [UMSocialSnsService presentSnsIconSheetView:curren_vc
                                                  appKey:zxYOUMENG_APPKEY
                                               shareText:[NSString stringWithFormat:@"我在看%@ ,",_downlaod_url]
                                              shareImage:_shareImage
                                         shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,
                                                          UMShareToTencent,
-                                                         UMShareToWechatTimeline,
+                                                         UMShareToRenren,
                                                          UMShareToQzone,
                                                          nil]
                                                delegate:nil];
-#endif
             
         }
             break;
@@ -200,7 +201,29 @@
             //收藏实际跳转的时候,需要webview,这个数据也需要缓存==>用于从收藏页面跳转到实际的webView页面.
             
             //在按钮点击的时候,得到的是收藏页面的VC,包含了收藏的webView页面.
-
+            /**
+             分析:
+            - 对于普通的网页,只需要收藏链接地址和和title ==>WebView传过来的.
+            - 对于时装和视觉页面,需要收藏 第一张图片, 和页面的id.
+        
+             设计数据库:
+             1.插入,查询,删除.
+             2.字段设计  index(自动增长),类型(WebView/PhotoView),title,link,article_id,image
+             3.需要有的方法:
+              收藏-->根据类型--->数据查询(是否存在)/插入数据
+              显示收藏--->根据类型--->查询数据
+              取消收藏--->根据类型和id--->删除数据
+             */
+            
+            NSLog(@"%s [LINE:%d] \ntype=%d, title=%@,link=%@,aricle=%@,imageurl=%@", __func__, __LINE__,
+                  _recoredType,
+                  _article_title,
+                  _downlaod_url,
+                  _article_id,
+                  _image_url
+                  );
+            ZXDataCenter *dc = [ZXDataCenter sharedDB];
+            
         }
             break;
 #pragma mark  评论按钮事件处理
@@ -216,28 +239,6 @@
     }
 }
 
-#pragma mark 友盟分享 -- 使用代理方法
-
-/**
- 1. 给单例对象设置值
- 2. 分享到哪些平台?
- 3. 执行分享方法
- */
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if(buttonIndex < 5){
-        
-        NSString *shareText = [NSString stringWithFormat:@"我在看%@ ,",_downlaod_url];
-        
-        [[UMSocialControllerService defaultControllerService] setShareText:shareText shareImage:_shareImage socialUIDelegate:nil];
-        
-        NSArray *sharePlatforms = @[UMShareToSina,UMShareToTencent,UMShareToWechatTimeline,UMShareToQzone];
-        
-        UMSocialSnsPlatform *platform = [UMSocialSnsPlatformManager getSocialPlatformWithName:sharePlatforms[buttonIndex]];
-        
-        platform.snsClickHandler(_currentClassObject,[UMSocialControllerService defaultControllerService],YES);
-    }
-}
 
 #pragma mark 保存图片
 /**

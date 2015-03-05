@@ -9,12 +9,14 @@
 #import "WebViewController.h"
 
 
-@interface WebViewController ()
+@interface WebViewController ()<UIWebViewDelegate>
 
 @end
 
 @implementation WebViewController
-
+{
+    UIWebView *_webView ;
+}
 
 - (void)viewDidLoad
 {
@@ -23,16 +25,20 @@
     [self getArticleURLPath];
 
     
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    _webView= [[UIWebView alloc]initWithFrame:self.view.bounds];
+    _webView.delegate = self;
     NSURL *url = [NSURL URLWithString:_urlIdentifier];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    [webView loadRequest:request];
-    [self.view addSubview:webView];
+    [_webView loadRequest:request];
+    [self.view addSubview:_webView];
     
     [self createButtomView];
 }
 
-
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+   self.article_title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
 
 #pragma mark 拼接网页地址
 

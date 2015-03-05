@@ -206,7 +206,6 @@
 }
 
 
-
 -(void)switchClicked:(UISwitch *)s{
 
     if (s.on) {

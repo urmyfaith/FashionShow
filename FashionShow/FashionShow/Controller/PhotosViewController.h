@@ -15,6 +15,8 @@
 //跳转过来到页面的id，
 @property(nonatomic,strong)NSString *gid;
 
+@property (nonatomic,assign)    zxDBRecordType    type;
+
 //数据模型
 @property (nonatomic,strong) id    model;
 

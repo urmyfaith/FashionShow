@@ -17,9 +17,6 @@
 /*==========导入友盟的库===========*/
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
-#import "TencentOpenAPI/QQApiInterface.h"
-#import "TencentOpenAPI/TencentOAuth.h"
-
 
 @implementation ZXAppDelegate
 
@@ -60,16 +57,19 @@
 -(void)createUmeng{
     
     [UMSocialData setAppKey:zxYOUMENG_APPKEY];
-    
-    NSString *url = @"http://zuoxue.sinaapp.com/UISettingResources/userInfo.json";
-    
-    [UMSocialWechatHandler setWXAppId:zxWEIXIN_APPKEY
-                                  url:url];
-    
-    [UMSocialConfig setQQAppId:zxQQ_APPKEY
-                           url:url
-                 importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
-    
+     NSString *url = @"http://zuoxue.sinaapp.com/UISettingResources/userInfo.json";
+     [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f"
+                             appSecret:@"db426a9829e4b49a0dcac7b4162da6b6"
+                                   url:url];
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation{
+    return  [UMSocialSnsService handleOpenURL:url];
 }
 
 

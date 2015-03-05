@@ -10,3 +10,11 @@
 #define zxJSON_DATATYPE_SPECIAL 7001
 #define zxJSON_DATATYPE_COMMENT 7002
 #define zxJSON_DATATYPE_BEAUTYPAGE 7003
+
+
+typedef  enum {
+    zxDBRecordTypeWithWebView = 1,
+    zxDBRecordTypeWithPhotoViewSZ,
+    zxDBRecordTypeWithPhotoViewSJ
+}zxDBRecordType;
+
