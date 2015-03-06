@@ -161,24 +161,21 @@ typedef enum {
  *  创建不同的视图:文章视图,时尚视图,视觉视图
  */
 -(void)refreshArticleView{
-    _articleView.modelsArray =  [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithWebView];
+    _articleView.modelsArray = [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithWebView];
     [_articleView drawView];
     [self.view addSubview:_articleView];
-    NSLog(@"%s [LINE:%d] #todo ", __func__, __LINE__);
 }
 
 -(void)refreshFashionView{
     _fashionView.modelsArray = [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSZ];
     [_fashionView drawView];
     [self.view addSubview:_fashionView];
-    NSLog(@"%s [LINE:%d] #todo ", __func__, __LINE__);
 }
 
 -(void)refreshVersionView{
-    _versionView.modelsArray =   [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSJ];
+    _versionView.modelsArray =  [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSJ];
     [_versionView drawView];
     [self.view addSubview:_versionView];
-    NSLog(@"%s [LINE:%d] #todo ", __func__, __LINE__);
 }
 
 /**
