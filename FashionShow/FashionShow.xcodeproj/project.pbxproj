@@ -424,6 +424,10 @@
 		FBC4796D1AA896F400091D2C /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC4795D1AA896F400091D2C /* libSocialWechat.a */; };
 		FBC4796E1AA896F400091D2C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC4795E1AA896F400091D2C /* libWeChatSDK.a */; };
 		FBC54EA91A81EFD5000A891D /* ZXNavigaitonBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */; };
+		FBCEFB181AA9C91D00B56FD2 /* ZXCollectionBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB171AA9C91D00B56FD2 /* ZXCollectionBaseView.m */; };
+		FBCEFB1B1AA9C96E00B56FD2 /* ZXArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB1A1AA9C96E00B56FD2 /* ZXArticleView.m */; };
+		FBCEFB1E1AA9C9AF00B56FD2 /* ZXFashionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB1D1AA9C9AF00B56FD2 /* ZXFashionView.m */; };
+		FBCEFB211AA9C9BB00B56FD2 /* ZXVersionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB201AA9C9BB00B56FD2 /* ZXVersionView.m */; };
 		FBD4446D1A8365CB00EB17D1 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD4446C1A8365CB00EB17D1 /* MainTableViewCell.m */; };
 		FBD5E4341A9F58FE005A797D /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = FBD5E4331A9F58FE005A797D /* readme.md */; };
 		FBDD13541AA1586300724201 /* BeautyBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDD13531AA1586300724201 /* BeautyBaseView.m */; };
@@ -954,6 +958,14 @@
 		FBC479611AA896F400091D2C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		FBC54EA71A81EFD5000A891D /* ZXNavigaitonBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXNavigaitonBar.h; sourceTree = "<group>"; };
 		FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXNavigaitonBar.m; sourceTree = "<group>"; };
+		FBCEFB161AA9C91D00B56FD2 /* ZXCollectionBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCollectionBaseView.h; sourceTree = "<group>"; };
+		FBCEFB171AA9C91D00B56FD2 /* ZXCollectionBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXCollectionBaseView.m; sourceTree = "<group>"; };
+		FBCEFB191AA9C96E00B56FD2 /* ZXArticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXArticleView.h; sourceTree = "<group>"; };
+		FBCEFB1A1AA9C96E00B56FD2 /* ZXArticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXArticleView.m; sourceTree = "<group>"; };
+		FBCEFB1C1AA9C9AF00B56FD2 /* ZXFashionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXFashionView.h; sourceTree = "<group>"; };
+		FBCEFB1D1AA9C9AF00B56FD2 /* ZXFashionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXFashionView.m; sourceTree = "<group>"; };
+		FBCEFB1F1AA9C9BB00B56FD2 /* ZXVersionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXVersionView.h; sourceTree = "<group>"; };
+		FBCEFB201AA9C9BB00B56FD2 /* ZXVersionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXVersionView.m; sourceTree = "<group>"; };
 		FBD4446B1A8365CB00EB17D1 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
 		FBD4446C1A8365CB00EB17D1 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		FBD5E4331A9F58FE005A797D /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
@@ -1801,6 +1813,7 @@
 		FB45818D1A81001000895E6F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FBCEFB151AA9C8E800B56FD2 /* CollectionPageView */,
 				FBD4446A1A8365A400EB17D1 /* cells */,
 				FBC54EA71A81EFD5000A891D /* ZXNavigaitonBar.h */,
 				FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */,
@@ -1965,6 +1978,21 @@
 				FBC479611AA896F400091D2C /* WXApiObject.h */,
 			);
 			path = Wechat;
+			sourceTree = "<group>";
+		};
+		FBCEFB151AA9C8E800B56FD2 /* CollectionPageView */ = {
+			isa = PBXGroup;
+			children = (
+				FBCEFB161AA9C91D00B56FD2 /* ZXCollectionBaseView.h */,
+				FBCEFB171AA9C91D00B56FD2 /* ZXCollectionBaseView.m */,
+				FBCEFB191AA9C96E00B56FD2 /* ZXArticleView.h */,
+				FBCEFB1A1AA9C96E00B56FD2 /* ZXArticleView.m */,
+				FBCEFB1C1AA9C9AF00B56FD2 /* ZXFashionView.h */,
+				FBCEFB1D1AA9C9AF00B56FD2 /* ZXFashionView.m */,
+				FBCEFB1F1AA9C9BB00B56FD2 /* ZXVersionView.h */,
+				FBCEFB201AA9C9BB00B56FD2 /* ZXVersionView.m */,
+			);
+			name = CollectionPageView;
 			sourceTree = "<group>";
 		};
 		FBD4446A1A8365A400EB17D1 /* cells */ = {
@@ -2438,6 +2466,7 @@
 				FB7C24141A9F5586006A5EA8 /* ZXWaterflowView.m in Sources */,
 				FBBFA6961A9FF85B0063A9E3 /* iToast.m in Sources */,
 				FB7C24041A9F3FA2006A5EA8 /* MJRefreshBaseView.m in Sources */,
+				FBCEFB1B1AA9C96E00B56FD2 /* ZXArticleView.m in Sources */,
 				BCC282FF1AA4798800B552BC /* UIImage+MultiFormat.m in Sources */,
 				FB92214D1A82473600342963 /* GenericModel.m in Sources */,
 				FB7C240A1A9F3FA2006A5EA8 /* UIView+MJExtension.m in Sources */,
@@ -2470,6 +2499,7 @@
 				BCC283011AA4798800B552BC /* UIImageView+HighlightedWebCache.m in Sources */,
 				FBF09C111A81E55D00444969 /* NSDate+Transform.m in Sources */,
 				BCC282FB1AA4798800B552BC /* SDWebImageManager.m in Sources */,
+				FBCEFB181AA9C91D00B56FD2 /* ZXCollectionBaseView.m in Sources */,
 				FBC54EA91A81EFD5000A891D /* ZXNavigaitonBar.m in Sources */,
 				FBDD13541AA1586300724201 /* BeautyBaseView.m in Sources */,
 				BCC282FC1AA4798800B552BC /* SDWebImagePrefetcher.m in Sources */,
@@ -2483,6 +2513,8 @@
 				FB35A22E1AA8353A00B8A08D /* FMDatabaseQueue.m in Sources */,
 				BCC283001AA4798800B552BC /* UIImage+WebP.m in Sources */,
 				FB4581B31A81016A00895E6F /* VisualViewController.m in Sources */,
+				FBCEFB1E1AA9C9AF00B56FD2 /* ZXFashionView.m in Sources */,
+				FBCEFB211AA9C9BB00B56FD2 /* ZXVersionView.m in Sources */,
 				FB4581AD1A81015B00895E6F /* BeautyViewController.m in Sources */,
 				FB4581A01A8100ED00895E6F /* ShowCommentsViewController.m in Sources */,
 				FB4581A71A81014700895E6F /* StarViewController.m in Sources */,

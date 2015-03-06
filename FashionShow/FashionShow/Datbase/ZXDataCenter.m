@@ -123,7 +123,7 @@
     [_database open];
     NSString *sql = @"select * from favourite where recordType=?;";
     FMResultSet *set = [_database executeQuery:sql,
-                        type];
+                        [NSString stringWithFormat:@"%d",type]];
     NSMutableArray *mArray = [NSMutableArray array];
     while ([set next]) {
         ZXRecordModel *rm = [[ZXRecordModel alloc]init];
