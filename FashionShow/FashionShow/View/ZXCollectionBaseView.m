@@ -10,6 +10,18 @@
 
 @implementation ZXCollectionBaseView
 
+
+-(NSArray *)modelsArray{
+    if (_modelsArray == nil) {
+        _modelsArray = [[NSArray alloc]init];
+    }
+    return _modelsArray;
+}
+
+-(void)drawView{
+
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

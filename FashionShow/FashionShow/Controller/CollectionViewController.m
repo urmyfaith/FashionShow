@@ -37,7 +37,6 @@ typedef enum {
     ZXArticleView *_articleView;
     ZXFashionView *_fashionView;
     ZXVersionView *_versionView;
-    
 
     CGRect _subViewFrame;
 }
@@ -67,7 +66,7 @@ typedef enum {
     [self createNavitaionbar];
     self.view.backgroundColor = [UIColor blackColor];
     [self createSwithBar];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     //注意先后顺序,先有createSwithBar,后有subView;
     _subViewFrame = CGRectMake(0,
                                CGRectGetMaxY(_swithBarView.frame),
@@ -76,7 +75,6 @@ typedef enum {
     _articleView = [[ZXArticleView alloc]initWithFrame:_subViewFrame];
     _fashionView = [[ZXFashionView alloc]initWithFrame:_subViewFrame];
     _versionView = [[ZXVersionView alloc]initWithFrame:_subViewFrame];
-    
     
     //默认页面
     [self refreshArticleView];
@@ -111,6 +109,7 @@ typedef enum {
           forControlEvents:UIControlEventTouchUpInside];
         [_swithBarView addSubview:button];
         
+        //设置默认选中的按钮
         if (index == 0 ) {
             button.selected = YES;
         }
@@ -118,6 +117,7 @@ typedef enum {
     [self.view addSubview:_swithBarView];
 }
 
+#pragma mark 点击按钮-移除视图-重新绘制
 /**
  *  切换按钮的点击事件
  *
