@@ -64,7 +64,7 @@
     NSString *article_image_link = model.article_image_link;
     
     _result = [_database executeUpdate:sql,
-               recordType,
+               [NSString stringWithFormat:@"%d",model.recordType],
                article_title,
                article_link,
                article_id,
@@ -80,13 +80,13 @@
     if (model.recordType == zxDBRecordTypeWithWebView) {
          sql  = @"delete from favourite where recordType=? and article_link=?;";
         _result = [_database executeUpdate:sql,
-                   model.recordType,
+                   [NSString stringWithFormat:@"%d",model.recordType],
                    model.article_link];
     }
     else{
         sql = @"delete from favourite where recordType=? and article_image_link=?;";
         _result = [_database executeUpdate:sql,
-                   model.recordType,
+                   [NSString stringWithFormat:@"%d",model.recordType],
                    model.article_image_link];
     }
     [_database close];
@@ -101,15 +101,16 @@
     if (model.recordType == zxDBRecordTypeWithWebView) {
         sql = @"select count(*) from favourite where recordType=? and article_link=?;";
         set =  [_database executeQuery:sql,
-                model.recordType,
+                [NSString stringWithFormat:@"%d",model.recordType],
                 model.article_link];
     }
     else{
         sql =@"select count(*) from favourite where recordType=? and article_image_link=?;";
         set =  [_database executeQuery:sql,
-                model.recordType,
+                [NSString stringWithFormat:@"%d",model.recordType],
                 model.article_image_link];
     }
+
     int count = 0 ;
     if ([set next]){
         count = [set intForColumnIndex:0];

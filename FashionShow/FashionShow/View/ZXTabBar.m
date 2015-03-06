@@ -42,10 +42,12 @@
  */
 
 /**
- *  导入数据库
+ *  导入数据库,数据库记录模型
  *
  */
 #import "ZXDataCenter.h"
+#import "ZXRecordModel.h"
+
 
 @interface ZXTabBar ()<UIActionSheetDelegate>
 
@@ -59,8 +61,12 @@
     NSString *_article_title;
     NSString *_image_url;
     zxDBRecordType _recoredType;
+    ZXRecordModel *_recoredModel;
     
    __block UIImage *_shareImage;
+    
+    BOOL _operateDateBaseStatus;
+    BOOL _isModelInDataBase;
 }
 - (id)initWithFrame:(CGRect)frame
 {
@@ -74,7 +80,6 @@
 -(ZXTabBar *)tabBarWithImagesArray:(NSArray *)imagesArray
                           andClass:(id)classObject
                             andSEL:(SEL)sel{
-    
     _currentClassObject = classObject;
     
     //背景图片---写在最前面.
@@ -154,6 +159,14 @@
         _recoredType = zxDBRecordTypeWithWebView;
         _article_title =((WebViewController*)curren_vc).article_title;
     }
+    
+    _recoredModel = [[ZXRecordModel alloc]init];
+    _recoredModel.recordType = _recoredType;
+    _recoredModel.article_title = _article_title;
+    _recoredModel.article_link = _downlaod_url;
+    _recoredModel.article_id = _article_id;
+    _recoredModel.article_image_link = _image_url;
+    
     NSLog(@"%s %d -- image_url=%@, article_id=%@ downlaod_url=%@",__func__,__LINE__,_image_url,_article_id,_downlaod_url);
     
     switch (button.tag) {
@@ -223,7 +236,23 @@
                   _image_url
                   );
             ZXDataCenter *dc = [ZXDataCenter sharedDB];
+            _isModelInDataBase = [dc isInDataBaseWithModel:_recoredModel];
+            NSLog(@"%s [LINE:%d]isInDB=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
             
+            UIButton *collectionButton = (UIButton *)[self viewWithTag:button.tag];
+            
+            if (_isModelInDataBase) {
+                _operateDateBaseStatus =  [dc deleteRecordWithModel:_recoredModel];
+                NSLog(@"%s [LINE:%d]delete data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
+                [collectionButton setImage:[UIImage imageNamed:@"收藏_1"]
+                                  forState:UIControlStateNormal];
+            }
+            else{
+                _operateDateBaseStatus =   [dc addRecordWithModel:_recoredModel];
+                NSLog(@"%s [LINE:%d]add data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
+                [collectionButton setImage:[UIImage imageNamed:@"已收藏_1"]
+                                  forState:UIControlStateNormal];
+            }       
         }
             break;
 #pragma mark  评论按钮事件处理
