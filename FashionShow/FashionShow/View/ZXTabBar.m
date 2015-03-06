@@ -252,7 +252,7 @@
                 NSLog(@"%s [LINE:%d]add data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
                 [collectionButton setImage:[UIImage imageNamed:@"已收藏_1"]
                                   forState:UIControlStateNormal];
-            }       
+            }
         }
             break;
 #pragma mark  评论按钮事件处理
@@ -315,12 +315,5 @@
     NSLog(@"%s [LINE:%d] msg=%@", __func__, __LINE__,msg);
     [[[iToast makeText:msg ]setDuration:iToastDurationNormal] show];
 }
-
-
-
-
-
-
-
 
 @end
