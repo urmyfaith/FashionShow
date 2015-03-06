@@ -527,6 +527,24 @@ http://www.baidu.com/s?wd=%E4%B8%AD%E6%96%87
 */
 ```
 
+
+## 问题19 收藏的问题
+
+```
+//处理收藏按钮的图片问题
+if (index == 3) {
+ZXDataCenter *dc = [ZXDataCenter sharedDB];
+_isModelInDataBase = [dc isInDataBaseWithModel:_recoredModel];
+if(_isModelInDataBase){
+[button setImage:[UIImage imageNamed:@"已收藏_1"]
+forState:UIControlStateNormal];
+}else{
+[button setImage:[UIImage imageNamed:@"收藏_1"]
+forState:UIControlStateNormal];
+}
+}
+```
+
 #todo 代码的复用,单行图片在左还是在右的代码的复用?
 
 #todo UICollectionView的复用

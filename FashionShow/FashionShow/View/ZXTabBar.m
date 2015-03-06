@@ -227,31 +227,32 @@
               显示收藏--->根据类型--->查询数据
               取消收藏--->根据类型和id--->删除数据
              */
-            
-            NSLog(@"%s [LINE:%d] \ntype=%d, title=%@,link=%@,aricle=%@,imageurl=%@", __func__, __LINE__,
-                  _recoredType,
-                  _article_title,
-                  _downlaod_url,
-                  _article_id,
-                  _image_url
-                  );
-            ZXDataCenter *dc = [ZXDataCenter sharedDB];
-            _isModelInDataBase = [dc isInDataBaseWithModel:_recoredModel];
-            NSLog(@"%s [LINE:%d]isInDB=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
-            
-            UIButton *collectionButton = (UIButton *)[self viewWithTag:button.tag];
-            
-            if (_isModelInDataBase) {
-                _operateDateBaseStatus =  [dc deleteRecordWithModel:_recoredModel];
-                NSLog(@"%s [LINE:%d]delete data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
-                [collectionButton setImage:[UIImage imageNamed:@"收藏_1"]
-                                  forState:UIControlStateNormal];
+            if (_recoredModel.recordType == zxDBRecordTypeWithWebView &&
+                _recoredModel.article_title == nil) {
+                NSString *errMsg = @"请等待网页加载完成";
+                [[[iToast makeText:errMsg ]setDuration:iToastDurationNormal] show];
             }
             else{
-                _operateDateBaseStatus =   [dc addRecordWithModel:_recoredModel];
-                NSLog(@"%s [LINE:%d]add data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
-                [collectionButton setImage:[UIImage imageNamed:@"已收藏_1"]
-                                  forState:UIControlStateNormal];
+                ZXDataCenter *dc = [ZXDataCenter sharedDB];
+                _isModelInDataBase = [dc isInDataBaseWithModel:_recoredModel];
+                NSLog(@"%s [LINE:%d]isInDB=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
+                
+                UIButton *collectionButton = (UIButton *)[self viewWithTag:button.tag];
+                
+                if (_isModelInDataBase) {
+                    _operateDateBaseStatus =  [dc deleteRecordWithModel:_recoredModel];
+                    NSLog(@"%s [LINE:%d]delete data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
+                    [[[iToast makeText:@"已移除收藏!" ]setDuration:iToastDurationNormal] show];
+                    [collectionButton setImage:[UIImage imageNamed:@"收藏_1"]
+                                      forState:UIControlStateNormal];
+                }
+                else{
+                    _operateDateBaseStatus =   [dc addRecordWithModel:_recoredModel];
+                    NSLog(@"%s [LINE:%d]add data=%@", __func__, __LINE__,_operateDateBaseStatus==YES?@"YES":@"NO");
+                    [[[iToast makeText:@"已收藏!" ]setDuration:iToastDurationNormal] show];
+                    [collectionButton setImage:[UIImage imageNamed:@"已收藏_1"]
+                                      forState:UIControlStateNormal];
+                }
             }
         }
             break;
