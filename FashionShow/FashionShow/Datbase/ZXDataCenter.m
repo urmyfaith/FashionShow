@@ -127,6 +127,7 @@
     NSMutableArray *mArray = [NSMutableArray array];
     while ([set next]) {
         ZXRecordModel *rm = [[ZXRecordModel alloc]init];
+        rm.recordType = type;
         rm.article_title = [set stringForColumn:@"article_title"];
         rm.article_link = [set stringForColumn:@"article_link"];
         rm.article_id = [set stringForColumn:@"article_id"];

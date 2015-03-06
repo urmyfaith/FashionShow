@@ -13,7 +13,6 @@
 
 @property (nonatomic,strong) NSString    *article_id;
 
-
 @property (nonatomic,strong) NSString    *article_title;
 
 @property (nonatomic,strong) id    model;

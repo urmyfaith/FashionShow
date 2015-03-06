@@ -14,6 +14,10 @@
 #import "ZXFashionView.h"
 #import "ZXVersionView.h"
 
+/*==========页面跳转===========*/
+#import "ZXRecordModel.h"
+#import "WebViewController.h"
+#import "PhotosViewController.h"
 
 #define switchBarHEIGHT 40.0f
 #define swithBarBaseTag 1000
@@ -76,8 +80,25 @@ typedef enum {
     _fashionView = [[ZXFashionView alloc]initWithFrame:_subViewFrame];
     _versionView = [[ZXVersionView alloc]initWithFrame:_subViewFrame];
     
+    _articleView.delegate = self;
+    _fashionView.delegate = self;
+    _versionView.delegate = self;
+    
     //默认页面
     [self refreshArticleView];
+}
+
+
+-(void)pushToViewControllerWithRecoredModel:(ZXRecordModel *)model{
+    
+    //1.webVeiw,2,相册
+    if (model.recordType == zxDBRecordTypeWithWebView) {
+        
+        WebViewController *webVC = [[WebViewController alloc]init];
+        webVC.article_id =  model.article_id;  //用于webView地址的拼接
+        webVC.modelType = zxJSON_DATATYPE_GENERIC; //标记数据模型的类型
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 
 #pragma mark  创建切换栏

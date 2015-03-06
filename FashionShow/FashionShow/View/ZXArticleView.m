@@ -58,7 +58,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   NSLog(@"%s [LINE:%d] indexPath=%d", __func__, __LINE__,indexPath.row);
+    
+    //执行页面跳转
+    [self.delegate pushToViewControllerWithRecoredModel:[self.modelsArray  objectAtIndex:indexPath.row]];
 }
 
 @end

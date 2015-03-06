@@ -8,6 +8,9 @@
 
 #import "RootViewController.h"
 
-@interface CollectionViewController : RootViewController
+#import "ZXCollectionBaseView.h"
+
+
+@interface CollectionViewController : RootViewController<ZXCollectionBaseViewDelegate>
 
 @end
