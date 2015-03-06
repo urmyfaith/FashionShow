@@ -27,13 +27,19 @@ typedef enum {
 @interface CollectionViewController ()
 @property (nonatomic,strong) NSArray    *selectedImage_array;
 @property (nonatomic,strong) NSArray    *unSelectedImage_array;
-@property (nonatomic,strong) NSArray    *records_array;
 @end
 
 @implementation CollectionViewController
 {
     ZXDataCenter *_dataCenter;
     UIView *_swithBarView;
+    
+    ZXArticleView *_articleView;
+    ZXFashionView *_fashionView;
+    ZXVersionView *_versionView;
+    
+
+    CGRect _subViewFrame;
 }
 #pragma mark  lazy_load
 -(NSArray *)selectedImage_array{
@@ -50,25 +56,30 @@ typedef enum {
     return _unSelectedImage_array;
 }
 
--(NSArray *)records_array{
-    if (_records_array == nil) {
-        _records_array = [[NSArray alloc]init];
-    }
-    return _records_array;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     _dataCenter = [ZXDataCenter sharedDB];
+
     
     [self createNavitaionbar];
     self.view.backgroundColor = [UIColor blackColor];
     [self createSwithBar];
     
+    //注意先后顺序,先有createSwithBar,后有subView;
+    _subViewFrame = CGRectMake(0,
+                               CGRectGetMaxY(_swithBarView.frame),
+                               zxSCRREN_WIDTH,
+                               zxSCRREN_HEIGHT -CGRectGetMaxY(_swithBarView.frame));
+    _articleView = [[ZXArticleView alloc]initWithFrame:_subViewFrame];
+    _fashionView = [[ZXFashionView alloc]initWithFrame:_subViewFrame];
+    _versionView = [[ZXVersionView alloc]initWithFrame:_subViewFrame];
+    
+    
     //默认页面
-    [self createArticleView];
+    [self refreshArticleView];
 }
 
 #pragma mark  创建切换栏
@@ -130,17 +141,17 @@ typedef enum {
     switch (button.tag) {
         case SwithBarTagWithArticle:
         {
-            [self createArticleView];
+            [self refreshArticleView];
         }
             break;
         case SwithBarTagWithFashion:
         {
-            [self createFashionView];
+            [self refreshFashionView];
         }
             break;
         case SwithBarTagWithVersion:
         {
-            [self createVersionView];
+            [self refreshVersionView];
         }
             break;
     }
@@ -149,30 +160,39 @@ typedef enum {
 /**
  *  创建不同的视图:文章视图,时尚视图,视觉视图
  */
--(void)createArticleView{
-    self.records_array =   [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithWebView];
-    ZXArticleView *av = [[ZXArticleView alloc]init];
-    av.frame = CGRectMake(0,
-                          CGRectGetMaxY(_swithBarView.frame),
-                          zxSCRREN_WIDTH,
-                          zxSCRREN_HEIGHT -CGRectGetMaxY(_swithBarView.frame));
-    [self.view addSubview:av];
+-(void)refreshArticleView{
+    _articleView.modelsArray =  [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithWebView];
+    [_articleView drawView];
+    [self.view addSubview:_articleView];
     NSLog(@"%s [LINE:%d] #todo ", __func__, __LINE__);
 }
 
--(void)createFashionView{
-    self.records_array =   [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSZ];
+-(void)refreshFashionView{
+    _fashionView.modelsArray = [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSZ];
+    [_fashionView drawView];
+    [self.view addSubview:_fashionView];
     NSLog(@"%s [LINE:%d] #todo ", __func__, __LINE__);
 }
 
--(void)createVersionView{
-    self.records_array =   [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSJ];
+-(void)refreshVersionView{
+    _versionView.modelsArray =   [_dataCenter getAllRecordsWithRecordType:zxDBRecordTypeWithPhotoViewSJ];
+    [_versionView drawView];
+    [self.view addSubview:_versionView];
     NSLog(@"%s [LINE:%d] #todo ", __func__, __LINE__);
 }
 
+/**
+ *  将三种类型的view从视图上移除
+ *
+ *  @param view 父视图
+ */
 -(void)removeAllSubViewInView:(UIView *)view{
-    for (UIView *subView in view.subviews) {
-        [subView removeFromSuperview];
+    for (id subView in view.subviews) {
+        if ([subView isKindOfClass:[ZXArticleView class]] ||
+            [subView isKindOfClass:[ZXFashionView class]] ||
+            [subView isKindOfClass:[ZXVersionView class]]) {
+            [((UIView *)subView) removeFromSuperview];
+        }
     }
 }
 
