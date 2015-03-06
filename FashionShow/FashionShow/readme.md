@@ -514,6 +514,18 @@ platform.snsClickHandler(self,[UMSocialControllerService defaultControllerServic
 }
 ```
 
+## 问题18 url中文编码的问题 
+
+
+```
+NSString *demo = @"http://www.baidu.com/s?wd=中文";
+NSString *demo2 = [demo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+/*
+
+http://www.baidu.com/s?wd=%E4%B8%AD%E6%96%87
+*/
+```
 
 #todo 代码的复用,单行图片在左还是在右的代码的复用?
 

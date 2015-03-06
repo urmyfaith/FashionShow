@@ -186,7 +186,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-    if(buttonIndex < 3){
+    if(buttonIndex < 2){
         
         NSString *shareText = @"全球时尚播报 __z2xy__";
         

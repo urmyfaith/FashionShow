@@ -2636,7 +2636,7 @@
 		FB45817A1A80F9EE00895E6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (297HJMGP7U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FashionShow/ThirdParyLibrary/umeng_ios_social_sdk_3.3.6_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -2664,7 +2664,7 @@
 		FB45817B1A80F9EE00895E6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (297HJMGP7U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FashionShow/ThirdParyLibrary/umeng_ios_social_sdk_3.3.6_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
