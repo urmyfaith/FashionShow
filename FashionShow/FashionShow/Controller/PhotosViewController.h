@@ -26,6 +26,8 @@
 
 @property(nonatomic,assign)NSUInteger currentPage;
 
+@property (nonatomic,assign)  CGFloat    favouriteImageHeight;//用于图片收藏
+@property (nonatomic,assign)  NSString   *favouriteImageURL;//用用于图片收藏,图片的链接地址-->key
 
 @property(nonatomic,strong)    NSString *urlIdentifier;//下载地址（浏览器中使用的时候，需要添加问号）
 @end

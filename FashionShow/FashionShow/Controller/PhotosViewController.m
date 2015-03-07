@@ -329,7 +329,7 @@
 #pragma mark 总数
     _totalNumber_label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_currentNumber_label.frame),
                                                                           CGRectGetMaxY(_title_label.frame) -5.0f,
-                                                                          20.0f,
+                                                                          30.0f,
                                                                           15.0f )];
     _totalNumber_label.text = @"def";
     _totalNumber_label.textColor = [UIColor whiteColor];

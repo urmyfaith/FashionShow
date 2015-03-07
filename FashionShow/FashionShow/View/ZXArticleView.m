@@ -7,7 +7,7 @@
 //
 
 #import "ZXArticleView.h"
-#import "ZXRecordModel.h"
+
 
 @interface ZXArticleView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -18,8 +18,16 @@
     UITableView *_tableView;
 }
 
-
 -(void)drawView{
+    [self removeAllSubViewInView:self];
+    if(self.modelsArray.count > 0){
+        [self createTableView];
+    }else{
+        [self createTipsViewInView:self];
+    }
+}
+
+-(void)createTableView{
     _tableView = [[UITableView alloc]initWithFrame:self.bounds style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.delegate = self;

@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZXRecordModel;
+#import "ZXRecordModel.h"
+#import "ZKDataCache.h"
+
+/*==========绘制瀑布流===========*/
+#import "ZXWaterflowView.h"
+#import "ZXWaterflowViewCell.h"
 
 @protocol ZXCollectionBaseViewDelegate <NSObject>
 
@@ -26,5 +31,7 @@
 @property(nonatomic,weak)__weak id<ZXCollectionBaseViewDelegate>delegate;
 
 -(void)drawView;
+-(void)removeAllSubViewInView:(UIView *)view;
+-(void)createTipsViewInView:(UIView *)view;
 
 @end

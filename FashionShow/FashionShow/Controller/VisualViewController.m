@@ -8,6 +8,7 @@
 
 #import "VisualViewController.h"
 #import "BeautyModel.h"
+#import "ZKDataCache.h"
 
 @interface VisualViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -125,8 +126,15 @@
     StarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
     BeautyModel *bm = (BeautyModel *)[_collectionViewDateSource_array objectAtIndex:indexPath.row];
-    
+
+    //自己混存图片代理SDWebImage混存图片,这样得到key就比较简单-->key(url)
+#if 0
     [cell.imageView  setImageWithURL:[NSURL URLWithString:bm.icon] placeholderImage:[UIImage imageNamed:@"明星缺省图"]];
+#else
+    ZKDataCache *dataCache = [ZKDataCache sharedInstance];
+    [dataCache setImageOfImageView:cell.imageView
+   withImageCacheOrDownloadFromURL:bm.icon];
+#endif
     
     return cell;
 }
@@ -135,6 +143,9 @@
     NSLog(@"%s [LINE:%d] indexPatsh=%ld", __func__, __LINE__,indexPath.row);
     PhotosViewController *photoVC = [[PhotosViewController alloc]init];
     BeautyModel *model = (BeautyModel *)[_collectionViewDateSource_array objectAtIndex:indexPath.row];
+    
+    photoVC.favouriteImageHeight = 140.0f;//用于记录收藏图片-->高度
+    photoVC.favouriteImageURL = model.icon;
     
     photoVC.gid =  model.id;  //用于webView地址的拼接
     photoVC.type = zxDBRecordTypeWithPhotoViewSJ;//标记来自视觉页面;

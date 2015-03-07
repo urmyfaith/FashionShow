@@ -47,7 +47,7 @@
 
 -(BOOL)createFavouriteTable{
     [_database open];
-    NSString *sql = @"create table if not exists favourite( id integer primary key autoincrement not null,recordType integer,article_title varchar(100),article_link varchar(100),article_id varchar(100),article_image_link varchar(200));";
+    NSString *sql = @"create table if not exists favourite( id integer primary key autoincrement not null,recordType integer,article_title varchar(100),article_link varchar(100),article_id varchar(100),article_image_link varchar(200),favouriteImageHeight integer);";
     _result = [_database executeUpdate:sql];
     [_database close];
     return _result;
@@ -56,19 +56,20 @@
 -(BOOL)addRecordWithModel:(ZXRecordModel *)model{
     
     [_database open];
-    NSString *sql  = @"insert into favourite(recordType,article_title,article_link,article_id,article_image_link) values(?,?,?,?,?);";
-    NSInteger recordType = model.recordType;
+    NSString *sql  = @"insert into favourite(recordType,article_title,article_link,article_id,article_image_link,favouriteImageHeight) values(?,?,?,?,?,?);";
+    NSString *recordType = [NSString stringWithFormat:@"%d",model.recordType];
     NSString *article_title = model.article_title;
     NSString *article_link = model.article_link;
     NSString *article_id = model.article_id;
     NSString *article_image_link = model.article_image_link;
-    
+    NSString *favouriteImageHeight = [NSString stringWithFormat:@"%.f",model.favouriteImageHeight];
     _result = [_database executeUpdate:sql,
-               [NSString stringWithFormat:@"%d",model.recordType],
+               recordType,
                article_title,
                article_link,
                article_id,
-               article_image_link
+               article_image_link,
+               favouriteImageHeight
                ];
     [_database close];
     return _result;
@@ -132,6 +133,7 @@
         rm.article_link = [set stringForColumn:@"article_link"];
         rm.article_id = [set stringForColumn:@"article_id"];
         rm.article_image_link = [set stringForColumn:@"article_image_link"];
+        rm.favouriteImageHeight = [[set stringForColumn:@"favouriteImageHeight"] intValue];
         [mArray addObject:rm];
     }
     [_database close];

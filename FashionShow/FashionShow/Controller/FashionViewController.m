@@ -290,16 +290,27 @@ typedef enum {
 -(void)waterflowView:(ZXWaterflowView *)waterflowView didSelectAtIndex:(NSUInteger)index{
     NSLog(@"didSelectAtIndex:%d",index);
     
+    /*
+     icon=http://qqssbb.cms.handleader.com/upload//day_131220/201312201551449_home_iphone4.jpg gid=1683 tiltle=时尚简洁欧美风 人气款高回头率单品 pic_height=323 timestamp=1387525680
+     */
+    
     PhotosViewController *photoVC = [[PhotosViewController alloc]init];
     FashionModel *model = (FashionModel *)[_models_mArray objectAtIndex:index];
     
     photoVC.gid =  model.gid;  //用于webView地址的拼接
     photoVC.type = zxDBRecordTypeWithPhotoViewSZ;//标记来自时装页面;
     
+    //用于收藏图片-->高度,收藏地址
+    photoVC.favouriteImageHeight = model.pic_height/2;
+    photoVC.favouriteImageURL = model.icon;
+    
     ZXTabBarVC *tvc = [ZXTabBarVC sharedZXTabBarViewController];
     tvc.customTabBar.hidden = YES;
     
     [self.navigationController pushViewController:photoVC animated:YES];
+    
+    //缓存图片--->得到图片的高度,图片的内容,写入本地文件.
+    //图片的高度写入数据库,图片的url作为key,图片的内容作为vaule
     
 }
 

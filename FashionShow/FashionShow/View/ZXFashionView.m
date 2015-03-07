@@ -8,30 +8,33 @@
 
 #import "ZXFashionView.h"
 
-#import "ZXWaterflowView.h"
-#import "ZXWaterflowViewCell.h"
+
 
 
 @interface ZXFashionView ()<ZXWaterflowViewDelegate,ZXWaterflowViewDataSource>
 
 @end
 
-#todo 2015-03-07
+//#todo 2015-03-07
 
 @implementation ZXFashionView
 {
     ZXWaterflowView *_waterflowView;
-
 }
-
 
 /**
  *  模型数组===>图片数组===>下载图片====>得到图片的高度===>绘制.
  */
 -(void)drawView{
-    self.backgroundColor = [UIColor yellowColor];
-    [self createWaterfallFlow];
+    [self removeAllSubViewInView:self];
+    if(self.modelsArray.count > 0){
+        [self createWaterfallFlow];
+    }else{
+        [self createTipsViewInView:self];
+    }
 }
+
+
 
 #pragma mark 绘制瀑布流
 -(void)createWaterfallFlow{
@@ -45,12 +48,30 @@
 #pragma mark ZXWaterflowView Delegate & DataSoucre
 
 -(NSUInteger)numberOfCellsInWaterflowView:(ZXWaterflowView *)waterflowView{
-    return 10;
+    return self.modelsArray.count;
 }
 
 -(ZXWaterflowViewCell *)waterflowView:(ZXWaterflowView *)waterflowView cellAtIndex:(NSUInteger)index{
-
-    return nil;
+    static NSString *identifier = @"collection_fashion";
+    
+    ZXRecordModel *rm = (ZXRecordModel *)[self.modelsArray objectAtIndex:index];
+    
+    CGFloat imageHeight = rm.favouriteImageHeight;
+    NSString *imageURL = rm.article_image_link;
+    
+    ZXWaterflowViewCell *cell = [waterflowView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [[ZXWaterflowViewCell alloc]initWithFrame:CGRectMake(0, 0, 105.0f, imageHeight)];
+        UIImageView *imageVeiw = [[UIImageView alloc]initWithFrame:cell.bounds];
+        imageVeiw.tag = 10001;
+        [cell addSubview:imageVeiw];
+    }
+    
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:10001];
+    
+    ZKDataCache *dataCache = [ZKDataCache sharedInstance];
+    [dataCache setImageOfImageView:imageView withImageCacheOrDownloadFromURL:imageURL];
+    return cell;
 }
 
 -(CGFloat)waterflowView:(ZXWaterflowView *)waterflowView marginForType:(ZXWaterFlowViewMarginType)type{
@@ -71,14 +92,13 @@
     return 0.0f;
 }
 
-
 -(CGFloat)waterflowView:(ZXWaterflowView *)waterflowView heightAtIndex:(NSUInteger)index{
-    return 0.0f;
+    ZXRecordModel *rm = (ZXRecordModel *)[self.modelsArray objectAtIndex:index];
+    return rm.favouriteImageHeight;
 }
 
 -(void)waterflowView:(ZXWaterflowView *)waterflowView didSelectAtIndex:(NSUInteger)index{
-
-    
+    [self.delegate pushToViewControllerWithRecoredModel:[self.modelsArray  objectAtIndex:index]];
 }
 
 

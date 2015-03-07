@@ -99,6 +99,18 @@ typedef enum {
         webVC.modelType = zxJSON_DATATYPE_GENERIC; //标记数据模型的类型
         [self.navigationController pushViewController:webVC animated:YES];
     }
+    else{
+        PhotosViewController *photoVC = [[PhotosViewController alloc]init];
+        photoVC.gid =  model.article_id;
+        if (model.recordType == zxDBRecordTypeWithPhotoViewSJ) {
+            photoVC.type = zxDBRecordTypeWithPhotoViewSJ;
+        }else{
+            photoVC.type = zxDBRecordTypeWithPhotoViewSZ;
+        }
+        photoVC.favouriteImageHeight = model.favouriteImageHeight;
+        photoVC.favouriteImageURL = model.article_image_link;
+        [self.navigationController pushViewController:photoVC animated:YES];
+    }
 }
 
 #pragma mark  创建切换栏

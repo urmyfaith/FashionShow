@@ -60,6 +60,7 @@
     NSString *_article_id;
     NSString *_article_title;
     NSString *_image_url;
+    CGFloat _favouriteImageHeight;
     zxDBRecordType _recoredType;
     ZXRecordModel *_recoredModel;
     
@@ -136,13 +137,18 @@
     {
         GenericModel *gm  = (GenericModel *) [ ((PhotosViewController* )curren_vc).dataSource_mArray
                                                 objectAtIndex:( (PhotosViewController* )curren_vc).currentPage ];
-        _image_url = gm.icon;
+        
+        //修改存储图片的地址
+        _image_url = ((PhotosViewController* )curren_vc).favouriteImageURL;
+        //_image_url = gm.icon;
+        
+        
         _article_id = gm.id;
         _downlaod_url = ((PhotosViewController* )curren_vc).urlIdentifier;
         _recoredType = ((PhotosViewController*)curren_vc).type;
-        
+        _favouriteImageHeight = ((PhotosViewController *)curren_vc).favouriteImageHeight;
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        [manager downloadWithURL:_image_url
+        [manager downloadWithURL:[NSURL URLWithString:_image_url]
                          options:0
                         progress:nil
                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
@@ -166,6 +172,7 @@
     _recoredModel.article_link = _downlaod_url;
     _recoredModel.article_id = _article_id;
     _recoredModel.article_image_link = _image_url;
+    _recoredModel.favouriteImageHeight = _favouriteImageHeight;
     
     NSLog(@"%s %d -- image_url=%@, article_id=%@ downlaod_url=%@",__func__,__LINE__,_image_url,_article_id,_downlaod_url);
     

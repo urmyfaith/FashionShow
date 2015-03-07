@@ -17,6 +17,7 @@
 
 /*==========图片下载===========*/
 #import "UIImageView+WebCache.h"
+#import "ZKDataCache.h"
 
 
 @implementation FashionCell
@@ -66,8 +67,18 @@
  */
 -(void)setFashionModel:(FashionModel *)fashionModel{
     _fashionModel = fashionModel;
+    
+    //自己混存图片,代替SDWebImage来缓存图片,这样就有了混存的key--->url
+#if 0
     [self.imageView setImageWithURL:[NSURL URLWithString:fashionModel.icon]
+     
                    placeholderImage:[UIImage imageNamed:@"缺省图1"]];
+#else
+    ZKDataCache *dataCache = [ZKDataCache sharedInstance];
+    [dataCache setImageOfImageView:self.imageView
+   withImageCacheOrDownloadFromURL:fashionModel.icon];
+#endif
+    
 }
 
 //调整控件的frame

@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSString    *article_link;
 @property (nonatomic,strong) NSString    *article_id;
 @property (nonatomic,strong) NSString    *article_image_link;
+@property (nonatomic,assign) CGFloat     favouriteImageHeight;
 @end
 
 
