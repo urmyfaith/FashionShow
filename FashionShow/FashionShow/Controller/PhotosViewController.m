@@ -243,7 +243,7 @@
 
 #pragma mark 下载数据
 -(void)downloadData{
-
+    [SVProgressHUD showWithStatus:@"Loading..."];
     NSString *postData_string = [NSString stringWithFormat:@"action=picture&gid=%@&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37",self.gid];
     
     _urlIdentifier= [NSString stringWithFormat:@"%@%@",zxAPI_FULLPATH,postData_string];
@@ -261,7 +261,7 @@
 
 #pragma mark  下载数据完成
 -(void)photoPage_downloadFinish{
-    
+    [SVProgressHUD dismiss];
     [self.dataSource_mArray  addObjectsFromArray:[JSON2Model JSONData2ModelWithURLIdentifier:_urlIdentifier andDataType:zxJSON_DATATYPE_GENERIC]];
     //下载数据完成
     

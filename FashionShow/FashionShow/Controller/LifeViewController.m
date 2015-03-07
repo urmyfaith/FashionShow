@@ -49,7 +49,7 @@
     _urlIdentifier= [NSString stringWithFormat:@"%@%@",zxAPI_FULLPATH,postData_string];
     
     NSLog(@"_urlIdentifier=%@",_urlIdentifier);
-    
+    [SVProgressHUD showWithStatus:@"Loading..."];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(starPage_downloadFinish)
                                                 name:_urlIdentifier
@@ -60,7 +60,7 @@
 }
 
 -(void)starPage_downloadFinish{
-    
+    [SVProgressHUD dismiss];
     if ([self.postURL_offset isEqualToString:@"0"]) {
         [_collectionViewDateSource_array removeAllObjects];
     }

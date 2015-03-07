@@ -48,6 +48,7 @@
 #import "ZXDataCenter.h"
 #import "ZXRecordModel.h"
 
+#import "SVProgressHUD.h"
 
 @interface ZXTabBar ()<UIActionSheetDelegate>
 
@@ -184,6 +185,7 @@
             ZXTabBarVC *tvc = [ZXTabBarVC sharedZXTabBarViewController];
             tvc.customTabBar.hidden = NO;
             [curren_vc.navigationController popViewControllerAnimated:YES];
+            [SVProgressHUD dismiss];
         }
             break;
 #pragma mark  下载按钮事件处理

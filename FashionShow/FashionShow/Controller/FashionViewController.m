@@ -184,7 +184,7 @@ typedef enum {
     _urlIdentifier= [NSString stringWithFormat:@"%@%@",zxAPI_FULLPATH,postData_string];
     
     NSLog(@"_urlIdentifier=%@",_urlIdentifier);
-    
+    [SVProgressHUD showWithStatus:@"Loading..."];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(fashionPage_downloadFinish)
                                                 name:_urlIdentifier
@@ -196,7 +196,7 @@ typedef enum {
 }
 
 -(void)fashionPage_downloadFinish{
-
+    [SVProgressHUD dismiss];
     if ([self.postURL_offset isEqualToString:@"0"]) {
         if (self.currentDisplyingView == fashionViewShowViewMD) {
             [self.modelsMD_mArray removeAllObjects];

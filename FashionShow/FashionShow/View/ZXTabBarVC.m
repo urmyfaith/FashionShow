@@ -10,6 +10,8 @@
 #import "BaseViewController.h"
 #import "SettingViewController.h"
 #import "ZXNavigaitonBar.h"
+#import "SVProgressHUD.h"
+
 
 @interface ZXTabBarVC ()
 
@@ -109,6 +111,8 @@
 }
 
 -(void)buttonClick:(UIButton *)button{
+    
+    [SVProgressHUD dismiss];
     int button_selected_index = (int)button.tag -zxZXTabBarVCButtonBaseTag;
     
     self.selectedIndex = button_selected_index;

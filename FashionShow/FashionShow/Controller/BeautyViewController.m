@@ -64,7 +64,7 @@
     _urlIdentifier= [NSString stringWithFormat:@"%@%@",zxAPI_FULLPATH,postData_string];
     
     NSLog(@"_urlIdentifier=%@",_urlIdentifier);
-    
+    [SVProgressHUD show];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(fashionPage_downloadFinish)
                                                 name:_urlIdentifier
@@ -76,7 +76,7 @@
 }
 
 -(void)fashionPage_downloadFinish{
-    
+    [SVProgressHUD dismiss];
     if ([self.postURL_offset isEqualToString:@"0"]) {
         [self.beautyModels_mArray removeAllObjects];
     }

@@ -44,6 +44,7 @@
 
 #import "PhotosViewController.h"
 
+#import "SVProgressHUD.h"
 
 
 

@@ -35,8 +35,15 @@
     [self createButtomView];
 }
 
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    [SVProgressHUD showWithStatus:@"Loading..."];
+}
+
+
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    [SVProgressHUD dismiss];
    self.article_title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 

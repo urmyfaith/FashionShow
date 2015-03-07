@@ -444,6 +444,10 @@
 		FBC4796D1AA896F400091D2C /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC4795D1AA896F400091D2C /* libSocialWechat.a */; };
 		FBC4796E1AA896F400091D2C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC4795E1AA896F400091D2C /* libWeChatSDK.a */; };
 		FBC50A251AAACEBD00FFB6DD /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC50A241AAACEBD00FFB6DD /* ODRefreshControl.m */; };
+		FBC50A2D1AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC50A281AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.m */; };
+		FBC50A2E1AAAEBB200FFB6DD /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBC50A2A1AAAEBB200FFB6DD /* SVProgressHUD.bundle */; };
+		FBC50A2F1AAAEBB200FFB6DD /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC50A2C1AAAEBB200FFB6DD /* SVProgressHUD.m */; };
+		FBC50A771AAAF4D900FFB6DD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC50A761AAAF4D900FFB6DD /* QuartzCore.framework */; };
 		FBC54EA91A81EFD5000A891D /* ZXNavigaitonBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */; };
 		FBCEFB181AA9C91D00B56FD2 /* ZXCollectionBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB171AA9C91D00B56FD2 /* ZXCollectionBaseView.m */; };
 		FBCEFB1B1AA9C96E00B56FD2 /* ZXArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB1A1AA9C96E00B56FD2 /* ZXArticleView.m */; };
@@ -1020,6 +1024,13 @@
 		FBC479611AA896F400091D2C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		FBC50A231AAACEBD00FFB6DD /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		FBC50A241AAACEBD00FFB6DD /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		FBC50A271AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		FBC50A281AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		FBC50A291AAAEBB200FFB6DD /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		FBC50A2A1AAAEBB200FFB6DD /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		FBC50A2B1AAAEBB200FFB6DD /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		FBC50A2C1AAAEBB200FFB6DD /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		FBC50A761AAAF4D900FFB6DD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FBC54EA71A81EFD5000A891D /* ZXNavigaitonBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXNavigaitonBar.h; sourceTree = "<group>"; };
 		FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXNavigaitonBar.m; sourceTree = "<group>"; };
 		FBCEFB161AA9C91D00B56FD2 /* ZXCollectionBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCollectionBaseView.h; sourceTree = "<group>"; };
@@ -1066,6 +1077,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBC50A771AAAF4D900FFB6DD /* QuartzCore.framework in Frameworks */,
 				FBBE832C1AA723B10002825D /* libz.dylib in Frameworks */,
 				FBBE832A1AA723AB0002825D /* libstdc++.dylib in Frameworks */,
 				FBBE83281AA723A10002825D /* CoreTelephony.framework in Frameworks */,
@@ -1636,6 +1648,7 @@
 		FB2C71B11A8CA849000EB848 /* ThirdParyLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				FBC50A261AAAEBB200FFB6DD /* SVProgressHUD */,
 				FBC50A221AAACEBD00FFB6DD /* ODRefreshControl */,
 				FB3C4E451AAA8AAF0086A465 /* AFNetworking */,
 				FB3C4E591AAA8AAF0086A465 /* UIKit+AFNetworking */,
@@ -1767,6 +1780,7 @@
 		FB45814F1A80F9EE00895E6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FBC50A761AAAF4D900FFB6DD /* QuartzCore.framework */,
 				FBBE832B1AA723B10002825D /* libz.dylib */,
 				FBBE83291AA723AB0002825D /* libstdc++.dylib */,
 				FBBE83271AA723A10002825D /* CoreTelephony.framework */,
@@ -2127,6 +2141,19 @@
 			path = ODRefreshControl;
 			sourceTree = "<group>";
 		};
+		FBC50A261AAAEBB200FFB6DD /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				FBC50A271AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.h */,
+				FBC50A281AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.m */,
+				FBC50A291AAAEBB200FFB6DD /* SVProgressHUD-Prefix.pch */,
+				FBC50A2A1AAAEBB200FFB6DD /* SVProgressHUD.bundle */,
+				FBC50A2B1AAAEBB200FFB6DD /* SVProgressHUD.h */,
+				FBC50A2C1AAAEBB200FFB6DD /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		FBCEFB151AA9C8E800B56FD2 /* CollectionPageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2385,6 +2412,7 @@
 				BCC281C51AA4305900B552BC /* 已收藏_2@2x.png in Resources */,
 				FB45815B1A80F9EE00895E6F /* InfoPlist.strings in Resources */,
 				BCC2826A1AA4305900B552BC /* 头图.png in Resources */,
+				FBC50A2E1AAAEBB200FFB6DD /* SVProgressHUD.bundle in Resources */,
 				BCC281E11AA4305900B552BC /* 评论_2@2x.png in Resources */,
 				BCC282531AA4305900B552BC /* 列表1_1.png in Resources */,
 				BCC281A21AA4305900B552BC /* 护肤.png in Resources */,
@@ -2619,6 +2647,7 @@
 				FBBFA6961A9FF85B0063A9E3 /* iToast.m in Sources */,
 				FB7C24041A9F3FA2006A5EA8 /* MJRefreshBaseView.m in Sources */,
 				FBCEFB1B1AA9C96E00B56FD2 /* ZXArticleView.m in Sources */,
+				FBC50A2F1AAAEBB200FFB6DD /* SVProgressHUD.m in Sources */,
 				BCC282FF1AA4798800B552BC /* UIImage+MultiFormat.m in Sources */,
 				FB92214D1A82473600342963 /* GenericModel.m in Sources */,
 				FB7C240A1A9F3FA2006A5EA8 /* UIView+MJExtension.m in Sources */,
@@ -2629,6 +2658,7 @@
 				FBF8460B1AA0DD9800C758B8 /* BeautyLeftView.m in Sources */,
 				FB3C4E731AAA8AAF0086A465 /* AFURLResponseSerialization.m in Sources */,
 				FB301DA61AA09AEE00A70BE6 /* BeautySmallVIew.m in Sources */,
+				FBC50A2D1AAAEBB200FFB6DD /* SVIndefiniteAnimatedView.m in Sources */,
 				FB3C4E751AAA8AAF0086A465 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				FB7C24081A9F3FA2006A5EA8 /* UIScrollView+MJExtension.m in Sources */,
 				FBEA230B1A849CEE00427782 /* CommentModel.m in Sources */,

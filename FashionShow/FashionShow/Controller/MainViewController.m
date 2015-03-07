@@ -135,7 +135,7 @@
 
 #pragma mark 下载数据
 -(void)downloadData{
-    
+    [SVProgressHUD showWithStatus:@"Loading..."];
     NSString *postData_string = @"action=home&sa=Main&offset=0&count=20&uid=11111111&platform=a&mobile=HUAWEI+P6-C00&pid=10129&e=a2ae6a1b2c1a6aa2faa07bf2bd57ab37";
     _urlIdentifier= [NSString stringWithFormat:@"%@%@",zxAPI_FULLPATH,postData_string];
     
@@ -148,6 +148,7 @@
 
 
 -(void)mainPage_downloadFinish{
+    [SVProgressHUD dismiss];
      _tableViewDataSource_array = [JSON2Model JSONData2ModelWithURLIdentifier:_urlIdentifier andDataType:zxJSON_DATATYPE_GENERIC];
     [_tabelView reloadData];
 }

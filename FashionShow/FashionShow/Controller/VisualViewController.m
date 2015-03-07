@@ -41,7 +41,7 @@
 
 #pragma mark 下载数据
 -(void)downloadData{
-    
+    [SVProgressHUD showWithStatus:@"Loading..."];
     
     NSString *postData_string = [NSString stringWithFormat:zxpostData_string,
                                  self.postURL_action,
@@ -63,7 +63,7 @@
 }
 
 -(void)starPage_downloadFinish{
-    
+    [SVProgressHUD dismiss];
     if ([self.postURL_offset isEqualToString:@"0"]) {
         [_collectionViewDateSource_array removeAllObjects];
     }
