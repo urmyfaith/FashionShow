@@ -9,6 +9,7 @@
 #import "VisualViewController.h"
 #import "BeautyModel.h"
 #import "ZKDataCache.h"
+#import "ODRefreshControl.h"
 
 @interface VisualViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -19,6 +20,8 @@
     NSString *_urlIdentifier;
     UICollectionView *_collectionView;
     NSMutableArray *_collectionViewDateSource_array;
+    
+    ODRefreshControl *_refreshControl;
 }
 
 
@@ -67,7 +70,8 @@
     [_collectionViewDateSource_array addObjectsFromArray:[JSON2Model JSONData2ModelWithURLIdentifier:_urlIdentifier
                                                                                          andDataType:zxJSON_DATATYPE_BEAUTYPAGE]];
     [_collectionView reloadData];
-    [_collectionView headerEndRefreshing];
+    //[_collectionView headerEndRefreshing];
+    [_refreshControl endRefreshing];
     [_collectionView footerEndRefreshing];
     
 }
@@ -92,15 +96,20 @@
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[StarCollectionCell class] forCellWithReuseIdentifier:@"cell"];
     
-    [_collectionView addHeaderWithTarget:self action:@selector(loadNewItem)];
+     _refreshControl = [[ODRefreshControl alloc] initInScrollView:_collectionView];
+    [_refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+    
+    //[_collectionView addHeaderWithTarget:self action:@selector(loadNewItem)];
+    
     [_collectionView addFooterWithTarget:self action:@selector(loadMoreItem)];
 }
 
-
--(void)loadNewItem{
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
     self.postURL_offset = @"0";
     [self downloadData];
 }
+
 
 -(void)loadMoreItem{
     static int page = 1;

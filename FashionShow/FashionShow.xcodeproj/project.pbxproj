@@ -443,6 +443,7 @@
 		FBC4796C1AA896F400091D2C /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBC479591AA896F400091D2C /* UMSocialSDKResourcesNew.bundle */; };
 		FBC4796D1AA896F400091D2C /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC4795D1AA896F400091D2C /* libSocialWechat.a */; };
 		FBC4796E1AA896F400091D2C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC4795E1AA896F400091D2C /* libWeChatSDK.a */; };
+		FBC50A251AAACEBD00FFB6DD /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC50A241AAACEBD00FFB6DD /* ODRefreshControl.m */; };
 		FBC54EA91A81EFD5000A891D /* ZXNavigaitonBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */; };
 		FBCEFB181AA9C91D00B56FD2 /* ZXCollectionBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB171AA9C91D00B56FD2 /* ZXCollectionBaseView.m */; };
 		FBCEFB1B1AA9C96E00B56FD2 /* ZXArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCEFB1A1AA9C96E00B56FD2 /* ZXArticleView.m */; };
@@ -1017,6 +1018,8 @@
 		FBC4795F1AA896F400091D2C /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
 		FBC479601AA896F400091D2C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		FBC479611AA896F400091D2C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		FBC50A231AAACEBD00FFB6DD /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
+		FBC50A241AAACEBD00FFB6DD /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		FBC54EA71A81EFD5000A891D /* ZXNavigaitonBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXNavigaitonBar.h; sourceTree = "<group>"; };
 		FBC54EA81A81EFD5000A891D /* ZXNavigaitonBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXNavigaitonBar.m; sourceTree = "<group>"; };
 		FBCEFB161AA9C91D00B56FD2 /* ZXCollectionBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCollectionBaseView.h; sourceTree = "<group>"; };
@@ -1633,6 +1636,7 @@
 		FB2C71B11A8CA849000EB848 /* ThirdParyLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				FBC50A221AAACEBD00FFB6DD /* ODRefreshControl */,
 				FB3C4E451AAA8AAF0086A465 /* AFNetworking */,
 				FB3C4E591AAA8AAF0086A465 /* UIKit+AFNetworking */,
 				FB3C4E3E1AAA8A720086A465 /* MD5 */,
@@ -2114,6 +2118,15 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		FBC50A221AAACEBD00FFB6DD /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				FBC50A231AAACEBD00FFB6DD /* ODRefreshControl.h */,
+				FBC50A241AAACEBD00FFB6DD /* ODRefreshControl.m */,
+			);
+			path = ODRefreshControl;
+			sourceTree = "<group>";
+		};
 		FBCEFB151AA9C8E800B56FD2 /* CollectionPageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2593,6 +2606,7 @@
 				FB4581B61A8101D600895E6F /* WebViewController.m in Sources */,
 				FB7C24071A9F3FA2006A5EA8 /* MJRefreshHeaderView.m in Sources */,
 				FB301DA31AA0914800A70BE6 /* BeautyView.m in Sources */,
+				FBC50A251AAACEBD00FFB6DD /* ODRefreshControl.m in Sources */,
 				FB3C4E7B1AAA8AAF0086A465 /* UIProgressView+AFNetworking.m in Sources */,
 				FB3C4E711AAA8AAF0086A465 /* AFURLConnectionOperation.m in Sources */,
 				FB3C4E781AAA8AAF0086A465 /* UIAlertView+AFNetworking.m in Sources */,
