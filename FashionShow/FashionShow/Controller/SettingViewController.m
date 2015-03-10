@@ -8,9 +8,13 @@
 
 #import "SettingViewController.h"
 #import "CollectionViewController.h"
+#import "NSString+FileHandel.h"
 
 //导入友盟分享库
 #import "UMSocial.h"
+
+#define cachePath [NSString stringWithFormat:@"%@/Library/Caches/",NSHomeDirectory()]
+#define LableTag4FileSize 100086
 
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 
@@ -85,11 +89,14 @@
         {
             //清除缓存.
             //#todo
-            NSString *string = @"8.3M";
+
+            long fileSize = [NSString fileSizeForDir:cachePath];
+            NSString *string = [NSString stringWithFormat:@"%.1fM",fileSize/1024.f/1024.f];
             
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
             label.center = CGPointMake(cell.frame.size.width - label.frame.size.width/2 , (cell.frame.size.height - label.frame.size.height)/2 + label.frame.size.height/2);
             label.text = string;
+            label.tag = LableTag4FileSize;
             [cell.contentView addSubview:label];
             
         }else{
@@ -154,7 +161,9 @@
                 case 3://清除缓存
                 {
                     NSLog(@"%s [LINE:%d]", __func__, __LINE__);
-                    
+                    [NSString deleteCachesWithPath:cachePath];
+                    UILabel *lable = (UILabel *)[self.view viewWithTag:LableTag4FileSize];
+                    lable.text = @"0.0M";
                 }
                     break;
                     

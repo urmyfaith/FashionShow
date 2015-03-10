@@ -29,7 +29,7 @@ static ZKDataCache *cache = nil;
 
 -(void)saveData:(NSData *)data withFilename:(NSString *)urlString{
     //路径
-    NSString *path = [NSString stringWithFormat:@"%@/Documents/DataCache",NSHomeDirectory()];
+    NSString *path = [NSString stringWithFormat:@"%@/Library/Caches/DataCache",NSHomeDirectory()];
 
     
     //创建文件夹

@@ -31,7 +31,7 @@
 }
 
 -(BOOL)createDatabase{
-    NSString *dbPath = [NSString stringWithFormat:@"%@/Documents/dataCenter.db",NSHomeDirectory()];
+    NSString *dbPath = [NSString stringWithFormat:@"%@/Library/Caches/dataCenter.db",NSHomeDirectory()];
     
     _database = [[FMDatabase alloc]initWithPath:dbPath];
     
